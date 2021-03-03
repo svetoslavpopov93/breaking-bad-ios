@@ -8,14 +8,16 @@
 import UIKit
 
 protocol UserListViewInput: class {
-    
+    func update(with profiles: [Profile])
 }
 
-class UserListViewController: UIViewController, UserListViewInput {
+class UserListViewController: UIViewController {
     var interactor: UserListInteractorInput
     var router: UserListRouterInput
     
     private let tableView = UITableView()
+    
+    private var profiles: [Profile] = []
     
     init(interactor: UserListInteractorInput,
          router: UserListRouterInput) {
@@ -34,6 +36,22 @@ class UserListViewController: UIViewController, UserListViewInput {
         configureTableView()
         
         configureLayout()
+        
+        interactor.fetchData()
+        
+        
+        
+        
+        // TEMP:
+        let setupBlock: ((Profile) -> Void) = { profile in
+            profile.name = "Svetoslav"
+            profile.imageUrl = "someURL"
+            profile.nickname = "Svetlio"
+            profile.occupation = "Software engineer"
+            profile.seasonAppearance = "Some appearance"
+            profile.status = "engaged"
+        }
+        (UIApplication.shared.delegate as? AppDelegate)?.coreDataManager.insert(setupBlock: setupBlock)
     }
     
     private func configureTableView() {
@@ -50,15 +68,21 @@ class UserListViewController: UIViewController, UserListViewInput {
     }
 }
 
+extension UserListViewController: UserListViewInput {
+    func update(with profiles: [Profile]) {
+        self.profiles = profiles
+        tableView.reloadData()
+    }
+}
+
+// MARK: UITableViewDelegate, UITableViewDataSource
+
 extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return profiles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
         return UITableViewCell()
     }
 }

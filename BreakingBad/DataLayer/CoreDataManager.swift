@@ -8,7 +8,7 @@
 import CoreData
 
 class CoreDataManager {
-    lazy var persistentContainer: NSPersistentContainer = {
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "BreakingBad")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -18,10 +18,14 @@ class CoreDataManager {
         return container
     }()
     
-    func insert<T: NSManagedObject>(setupBlock: ((T) -> Void)) -> T {
+    var context: NSManagedObjectContext {
+        return persistentContainer.viewContext
+    }
+    
+    func insert<T: NSManagedObject>(setupBlock: ((T) -> Void)) {
         let object = T(context: persistentContainer.viewContext)
         setupBlock(object)
-        return object
+        persistentContainer.viewContext.insert(object)
     }
     
     func saveContext () {

@@ -5,8 +5,12 @@
 //  Created by Svetoslav Popov on 3.03.21.
 //
 
-import Foundation
+import CoreData
 
 class UserListPresenter: UserListInteractorOutput {
-    var view: UserListViewInput?
+    weak var view: UserListViewInput?
+    
+    func didUpdateProfiles(_ profiles: [Profile]) {
+        view?.update(with: profiles)
+    }
 }

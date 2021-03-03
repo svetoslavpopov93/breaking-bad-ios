@@ -14,8 +14,6 @@ class UserListConfigurator {
         let presenter = UserListPresenter()
         let interactor = UserListInteractor(presenter: presenter, coreDataManager: coreDataManager)
         let viewController = UserListViewController(interactor: interactor, router: router)
-        
-        interactor.presenter = presenter
         presenter.view = viewController
         return viewController
     }

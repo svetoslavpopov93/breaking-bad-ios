@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AE079F7525F0258000483260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7425F0258000483260 /* AppDelegate.swift */; };
 		AE079F7725F0258000483260 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7625F0258000483260 /* SceneDelegate.swift */; };
-		AE079F7925F0258000483260 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7825F0258000483260 /* ViewController.swift */; };
 		AE079F7C25F0258000483260 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE079F7A25F0258000483260 /* Main.storyboard */; };
 		AE079F7F25F0258000483260 /* BreakingBad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7D25F0258000483260 /* BreakingBad.xcdatamodeld */; };
 		AE079F8125F0258100483260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE079F8025F0258100483260 /* Assets.xcassets */; };
@@ -20,13 +19,13 @@
 		AE079FA225F031BD00483260 /* UserListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA125F031BD00483260 /* UserListRouter.swift */; };
 		AE079FA625F0499400483260 /* UserListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA525F0499400483260 /* UserListConfigurator.swift */; };
 		AE079FA925F04C4600483260 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA825F04C4600483260 /* CoreDataManager.swift */; };
+		AE079FAE25F04FEE00483260 /* NSManagedObject+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FAD25F04FEE00483260 /* NSManagedObject+Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AE079F7125F0258000483260 /* BreakingBad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakingBad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE079F7425F0258000483260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE079F7625F0258000483260 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AE079F7825F0258000483260 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AE079F7B25F0258000483260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE079F7E25F0258000483260 /* BreakingBad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BreakingBad.xcdatamodel; sourceTree = "<group>"; };
 		AE079F8025F0258100483260 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +37,7 @@
 		AE079FA125F031BD00483260 /* UserListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListRouter.swift; sourceTree = "<group>"; };
 		AE079FA525F0499400483260 /* UserListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListConfigurator.swift; sourceTree = "<group>"; };
 		AE079FA825F04C4600483260 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AE079FAD25F04FEE00483260 /* NSManagedObject+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Utility.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +72,6 @@
 			children = (
 				AE079F8F25F02A4A00483260 /* Flows */,
 				AE079F8D25F02A4100483260 /* Initial */,
-				AE079F7825F0258000483260 /* ViewController.swift */,
 				AE079F7A25F0258000483260 /* Main.storyboard */,
 				AE079F8C25F02A2800483260 /* Resourses */,
 				AE079FA425F0495100483260 /* DataLayer */,
@@ -124,6 +123,7 @@
 			children = (
 				AE079F7D25F0258000483260 /* BreakingBad.xcdatamodeld */,
 				AE079FA825F04C4600483260 /* CoreDataManager.swift */,
+				AE079FAD25F04FEE00483260 /* NSManagedObject+Utility.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -199,8 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE079F9F25F02BEA00483260 /* UserListViewController.swift in Sources */,
-				AE079F7925F0258000483260 /* ViewController.swift in Sources */,
 				AE079F9C25F02B6D00483260 /* UserListPresenter.swift in Sources */,
+				AE079FAE25F04FEE00483260 /* NSManagedObject+Utility.swift in Sources */,
 				AE079FA225F031BD00483260 /* UserListRouter.swift in Sources */,
 				AE079F7525F0258000483260 /* AppDelegate.swift in Sources */,
 				AE079F9225F02A8300483260 /* UserListInteractor.swift in Sources */,
