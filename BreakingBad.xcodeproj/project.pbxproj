@@ -20,6 +20,9 @@
 		AE079FA625F0499400483260 /* UserListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA525F0499400483260 /* UserListConfigurator.swift */; };
 		AE079FA925F04C4600483260 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA825F04C4600483260 /* CoreDataManager.swift */; };
 		AE079FAE25F04FEE00483260 /* NSManagedObject+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FAD25F04FEE00483260 /* NSManagedObject+Utility.swift */; };
+		AE079FB125F16B6000483260 /* UserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB025F16B6000483260 /* UserListCell.swift */; };
+		AE079FB425F16B8E00483260 /* UserListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE079FB325F16B8E00483260 /* UserListCell.xib */; };
+		AE079FB725F16EB500483260 /* UIImage+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB625F16EB500483260 /* UIImage+Loading.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		AE079FA525F0499400483260 /* UserListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListConfigurator.swift; sourceTree = "<group>"; };
 		AE079FA825F04C4600483260 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		AE079FAD25F04FEE00483260 /* NSManagedObject+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Utility.swift"; sourceTree = "<group>"; };
+		AE079FB025F16B6000483260 /* UserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListCell.swift; sourceTree = "<group>"; };
+		AE079FB325F16B8E00483260 /* UserListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserListCell.xib; sourceTree = "<group>"; };
+		AE079FB625F16EB500483260 /* UIImage+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Loading.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				AE079F9025F02A5200483260 /* UserList */,
+				AE079FB625F16EB500483260 /* UIImage+Loading.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -114,6 +121,8 @@
 				AE079F9E25F02BEA00483260 /* UserListViewController.swift */,
 				AE079FA125F031BD00483260 /* UserListRouter.swift */,
 				AE079FA525F0499400483260 /* UserListConfigurator.swift */,
+				AE079FB025F16B6000483260 /* UserListCell.swift */,
+				AE079FB325F16B8E00483260 /* UserListCell.xib */,
 			);
 			path = UserList;
 			sourceTree = "<group>";
@@ -185,6 +194,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE079FB425F16B8E00483260 /* UserListCell.xib in Resources */,
 				AE079F8425F0258100483260 /* LaunchScreen.storyboard in Resources */,
 				AE079F8125F0258100483260 /* Assets.xcassets in Resources */,
 				AE079F7C25F0258000483260 /* Main.storyboard in Resources */,
@@ -204,7 +214,9 @@
 				AE079FA225F031BD00483260 /* UserListRouter.swift in Sources */,
 				AE079F7525F0258000483260 /* AppDelegate.swift in Sources */,
 				AE079F9225F02A8300483260 /* UserListInteractor.swift in Sources */,
+				AE079FB725F16EB500483260 /* UIImage+Loading.swift in Sources */,
 				AE079FA625F0499400483260 /* UserListConfigurator.swift in Sources */,
+				AE079FB125F16B6000483260 /* UserListCell.swift in Sources */,
 				AE079F7F25F0258000483260 /* BreakingBad.xcdatamodeld in Sources */,
 				AE079FA925F04C4600483260 /* CoreDataManager.swift in Sources */,
 				AE079F7725F0258000483260 /* SceneDelegate.swift in Sources */,

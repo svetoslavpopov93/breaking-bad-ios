@@ -15,7 +15,13 @@ class UserListViewController: UIViewController {
     var interactor: UserListInteractorInput
     var router: UserListRouterInput
     
-    private let tableView = UITableView()
+    private let tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
+        return tableView
+    }()
     
     private var profiles: [Profile] = []
     
@@ -34,7 +40,6 @@ class UserListViewController: UIViewController {
         super.viewDidLoad()
         
         configureTableView()
-        
         configureLayout()
         
         interactor.fetchData()
@@ -56,6 +61,11 @@ class UserListViewController: UIViewController {
     
     private func configureTableView() {
         view.addSubview(tableView)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        let nib = UINib(nibName: "UserListCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "UserListCell")
     }
     
     private func configureLayout() {
@@ -83,6 +93,12 @@ extension UserListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserListCell", for: indexPath) as? UserListCell else {
+            return UITableViewCell()
+        }
+        let profile = profiles[indexPath.row]
+        cell.configure(with: profile.imageUrl, name: profile.name)
+        return cell
     }
 }
