@@ -9,21 +9,9 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    lazy var coreDataManager = CoreDataManager()
-    var window: UIWindow?
-    private var navigationController = UINavigationController()
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let viewController = UserListConfigurator.configure(navigationController: navigationController, coreDataManager: coreDataManager)
-        navigationController.pushViewController(viewController, animated: false)
-        
-        window = UIWindow()
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
         return true
     }
-
-    // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication,
                      configurationForConnecting connectingSceneSession: UISceneSession,

@@ -7,43 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE00500A25F18E74004D3181 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE00500925F18E74004D3181 /* Character.swift */; };
+		AE00502025F1A09C004D3181 /* CharacterPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE00501F25F1A09C004D3181 /* CharacterPreviewViewController.swift */; };
 		AE079F7525F0258000483260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7425F0258000483260 /* AppDelegate.swift */; };
 		AE079F7725F0258000483260 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7625F0258000483260 /* SceneDelegate.swift */; };
 		AE079F7C25F0258000483260 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE079F7A25F0258000483260 /* Main.storyboard */; };
-		AE079F7F25F0258000483260 /* BreakingBad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7D25F0258000483260 /* BreakingBad.xcdatamodeld */; };
 		AE079F8125F0258100483260 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE079F8025F0258100483260 /* Assets.xcassets */; };
 		AE079F8425F0258100483260 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE079F8225F0258100483260 /* LaunchScreen.storyboard */; };
-		AE079F9225F02A8300483260 /* UserListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F9125F02A8300483260 /* UserListInteractor.swift */; };
-		AE079F9C25F02B6D00483260 /* UserListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F9B25F02B6D00483260 /* UserListPresenter.swift */; };
-		AE079F9F25F02BEA00483260 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F9E25F02BEA00483260 /* UserListViewController.swift */; };
-		AE079FA225F031BD00483260 /* UserListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA125F031BD00483260 /* UserListRouter.swift */; };
-		AE079FA625F0499400483260 /* UserListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA525F0499400483260 /* UserListConfigurator.swift */; };
-		AE079FA925F04C4600483260 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA825F04C4600483260 /* CoreDataManager.swift */; };
-		AE079FAE25F04FEE00483260 /* NSManagedObject+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FAD25F04FEE00483260 /* NSManagedObject+Utility.swift */; };
-		AE079FB125F16B6000483260 /* UserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB025F16B6000483260 /* UserListCell.swift */; };
-		AE079FB425F16B8E00483260 /* UserListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE079FB325F16B8E00483260 /* UserListCell.xib */; };
+		AE079F9225F02A8300483260 /* CharactersListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F9125F02A8300483260 /* CharactersListInteractor.swift */; };
+		AE079F9C25F02B6D00483260 /* CharactersListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F9B25F02B6D00483260 /* CharactersListPresenter.swift */; };
+		AE079F9F25F02BEA00483260 /* CharactersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F9E25F02BEA00483260 /* CharactersListViewController.swift */; };
+		AE079FA225F031BD00483260 /* CharactersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA125F031BD00483260 /* CharactersListRouter.swift */; };
+		AE079FA625F0499400483260 /* CharactersListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA525F0499400483260 /* CharactersListConfigurator.swift */; };
+		AE079FB125F16B6000483260 /* CharactersListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB025F16B6000483260 /* CharactersListCell.swift */; };
+		AE079FB425F16B8E00483260 /* CharactersListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE079FB325F16B8E00483260 /* CharactersListCell.xib */; };
 		AE079FB725F16EB500483260 /* UIImage+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB625F16EB500483260 /* UIImage+Loading.swift */; };
+		AE93199B25F509A300521407 /* SortAndFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199A25F509A300521407 /* SortAndFilterViewController.swift */; };
+		AE93199F25F50B1100521407 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199E25F50B1100521407 /* LabelCell.swift */; };
+		AE9319A225F50B2A00521407 /* CheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319A125F50B2A00521407 /* CheckboxCell.swift */; };
+		AE9319A525F50B4D00521407 /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319A425F50B4D00521407 /* SegmentedControlCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE00500925F18E74004D3181 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		AE00501F25F1A09C004D3181 /* CharacterPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterPreviewViewController.swift; sourceTree = "<group>"; };
 		AE079F7125F0258000483260 /* BreakingBad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakingBad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE079F7425F0258000483260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE079F7625F0258000483260 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		AE079F7B25F0258000483260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AE079F7E25F0258000483260 /* BreakingBad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BreakingBad.xcdatamodel; sourceTree = "<group>"; };
 		AE079F8025F0258100483260 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE079F8325F0258100483260 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AE079F8525F0258100483260 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AE079F9125F02A8300483260 /* UserListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListInteractor.swift; sourceTree = "<group>"; };
-		AE079F9B25F02B6D00483260 /* UserListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListPresenter.swift; sourceTree = "<group>"; };
-		AE079F9E25F02BEA00483260 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
-		AE079FA125F031BD00483260 /* UserListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListRouter.swift; sourceTree = "<group>"; };
-		AE079FA525F0499400483260 /* UserListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListConfigurator.swift; sourceTree = "<group>"; };
-		AE079FA825F04C4600483260 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		AE079FAD25F04FEE00483260 /* NSManagedObject+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Utility.swift"; sourceTree = "<group>"; };
-		AE079FB025F16B6000483260 /* UserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListCell.swift; sourceTree = "<group>"; };
-		AE079FB325F16B8E00483260 /* UserListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserListCell.xib; sourceTree = "<group>"; };
+		AE079F9125F02A8300483260 /* CharactersListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListInteractor.swift; sourceTree = "<group>"; };
+		AE079F9B25F02B6D00483260 /* CharactersListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListPresenter.swift; sourceTree = "<group>"; };
+		AE079F9E25F02BEA00483260 /* CharactersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewController.swift; sourceTree = "<group>"; };
+		AE079FA125F031BD00483260 /* CharactersListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListRouter.swift; sourceTree = "<group>"; };
+		AE079FA525F0499400483260 /* CharactersListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListConfigurator.swift; sourceTree = "<group>"; };
+		AE079FB025F16B6000483260 /* CharactersListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListCell.swift; sourceTree = "<group>"; };
+		AE079FB325F16B8E00483260 /* CharactersListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersListCell.xib; sourceTree = "<group>"; };
 		AE079FB625F16EB500483260 /* UIImage+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Loading.swift"; sourceTree = "<group>"; };
+		AE93199A25F509A300521407 /* SortAndFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFilterViewController.swift; sourceTree = "<group>"; };
+		AE93199E25F50B1100521407 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
+		AE9319A125F50B2A00521407 /* CheckboxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxCell.swift; sourceTree = "<group>"; };
+		AE9319A425F50B4D00521407 /* SegmentedControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +82,7 @@
 		AE079F7325F0258000483260 /* BreakingBad */ = {
 			isa = PBXGroup;
 			children = (
+				AE29335925F301CE006A4449 /* Utility */,
 				AE079F8F25F02A4A00483260 /* Flows */,
 				AE079F8D25F02A4100483260 /* Initial */,
 				AE079F7A25F0258000483260 /* Main.storyboard */,
@@ -107,34 +114,76 @@
 		AE079F8F25F02A4A00483260 /* Flows */ = {
 			isa = PBXGroup;
 			children = (
-				AE079F9025F02A5200483260 /* UserList */,
-				AE079FB625F16EB500483260 /* UIImage+Loading.swift */,
+				AE93199925F5098E00521407 /* SortAndFilter */,
+				AE29335825F301BD006A4449 /* CharacterPreview */,
+				AE079F9025F02A5200483260 /* CharacterList */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
 		};
-		AE079F9025F02A5200483260 /* UserList */ = {
+		AE079F9025F02A5200483260 /* CharacterList */ = {
 			isa = PBXGroup;
 			children = (
-				AE079F9125F02A8300483260 /* UserListInteractor.swift */,
-				AE079F9B25F02B6D00483260 /* UserListPresenter.swift */,
-				AE079F9E25F02BEA00483260 /* UserListViewController.swift */,
-				AE079FA125F031BD00483260 /* UserListRouter.swift */,
-				AE079FA525F0499400483260 /* UserListConfigurator.swift */,
-				AE079FB025F16B6000483260 /* UserListCell.swift */,
-				AE079FB325F16B8E00483260 /* UserListCell.xib */,
+				AE079F9125F02A8300483260 /* CharactersListInteractor.swift */,
+				AE079F9B25F02B6D00483260 /* CharactersListPresenter.swift */,
+				AE079F9E25F02BEA00483260 /* CharactersListViewController.swift */,
+				AE079FA125F031BD00483260 /* CharactersListRouter.swift */,
+				AE079FA525F0499400483260 /* CharactersListConfigurator.swift */,
+				AE9319A925F50BE100521407 /* Cells */,
 			);
-			path = UserList;
+			path = CharacterList;
 			sourceTree = "<group>";
 		};
 		AE079FA425F0495100483260 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				AE079F7D25F0258000483260 /* BreakingBad.xcdatamodeld */,
-				AE079FA825F04C4600483260 /* CoreDataManager.swift */,
-				AE079FAD25F04FEE00483260 /* NSManagedObject+Utility.swift */,
+				AE00500925F18E74004D3181 /* Character.swift */,
 			);
 			path = DataLayer;
+			sourceTree = "<group>";
+		};
+		AE29335825F301BD006A4449 /* CharacterPreview */ = {
+			isa = PBXGroup;
+			children = (
+				AE00501F25F1A09C004D3181 /* CharacterPreviewViewController.swift */,
+			);
+			path = CharacterPreview;
+			sourceTree = "<group>";
+		};
+		AE29335925F301CE006A4449 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				AE079FB625F16EB500483260 /* UIImage+Loading.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		AE93199925F5098E00521407 /* SortAndFilter */ = {
+			isa = PBXGroup;
+			children = (
+				AE93199A25F509A300521407 /* SortAndFilterViewController.swift */,
+				AE9319A725F50B5900521407 /* Cells */,
+			);
+			path = SortAndFilter;
+			sourceTree = "<group>";
+		};
+		AE9319A725F50B5900521407 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AE93199E25F50B1100521407 /* LabelCell.swift */,
+				AE9319A125F50B2A00521407 /* CheckboxCell.swift */,
+				AE9319A425F50B4D00521407 /* SegmentedControlCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		AE9319A925F50BE100521407 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AE079FB025F16B6000483260 /* CharactersListCell.swift */,
+				AE079FB325F16B8E00483260 /* CharactersListCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,7 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE079FB425F16B8E00483260 /* UserListCell.xib in Resources */,
+				AE079FB425F16B8E00483260 /* CharactersListCell.xib in Resources */,
 				AE079F8425F0258100483260 /* LaunchScreen.storyboard in Resources */,
 				AE079F8125F0258100483260 /* Assets.xcassets in Resources */,
 				AE079F7C25F0258000483260 /* Main.storyboard in Resources */,
@@ -208,17 +257,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE079F9F25F02BEA00483260 /* UserListViewController.swift in Sources */,
-				AE079F9C25F02B6D00483260 /* UserListPresenter.swift in Sources */,
-				AE079FAE25F04FEE00483260 /* NSManagedObject+Utility.swift in Sources */,
-				AE079FA225F031BD00483260 /* UserListRouter.swift in Sources */,
+				AE93199B25F509A300521407 /* SortAndFilterViewController.swift in Sources */,
+				AE079F9F25F02BEA00483260 /* CharactersListViewController.swift in Sources */,
+				AE079F9C25F02B6D00483260 /* CharactersListPresenter.swift in Sources */,
+				AE00500A25F18E74004D3181 /* Character.swift in Sources */,
+				AE9319A225F50B2A00521407 /* CheckboxCell.swift in Sources */,
+				AE93199F25F50B1100521407 /* LabelCell.swift in Sources */,
+				AE9319A525F50B4D00521407 /* SegmentedControlCell.swift in Sources */,
+				AE079FA225F031BD00483260 /* CharactersListRouter.swift in Sources */,
 				AE079F7525F0258000483260 /* AppDelegate.swift in Sources */,
-				AE079F9225F02A8300483260 /* UserListInteractor.swift in Sources */,
+				AE079F9225F02A8300483260 /* CharactersListInteractor.swift in Sources */,
 				AE079FB725F16EB500483260 /* UIImage+Loading.swift in Sources */,
-				AE079FA625F0499400483260 /* UserListConfigurator.swift in Sources */,
-				AE079FB125F16B6000483260 /* UserListCell.swift in Sources */,
-				AE079F7F25F0258000483260 /* BreakingBad.xcdatamodeld in Sources */,
-				AE079FA925F04C4600483260 /* CoreDataManager.swift in Sources */,
+				AE079FA625F0499400483260 /* CharactersListConfigurator.swift in Sources */,
+				AE00502025F1A09C004D3181 /* CharacterPreviewViewController.swift in Sources */,
+				AE079FB125F16B6000483260 /* CharactersListCell.swift in Sources */,
 				AE079F7725F0258000483260 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,19 +471,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		AE079F7D25F0258000483260 /* BreakingBad.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				AE079F7E25F0258000483260 /* BreakingBad.xcdatamodel */,
-			);
-			currentVersion = AE079F7E25F0258000483260 /* BreakingBad.xcdatamodel */;
-			path = BreakingBad.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = AE079F6925F0258000483260 /* Project object */;
 }
