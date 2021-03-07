@@ -35,7 +35,7 @@ class SegmentedControlCell: UITableViewCell {
         NSLayoutConstraint.activate([
             segmentedControl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             segmentedControl.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
-            segmentedControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 16),
+            segmentedControl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
         ])
     }

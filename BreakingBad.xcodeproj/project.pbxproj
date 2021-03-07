@@ -26,6 +26,7 @@
 		AE93199F25F50B1100521407 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199E25F50B1100521407 /* LabelCell.swift */; };
 		AE9319A225F50B2A00521407 /* CheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319A125F50B2A00521407 /* CheckboxCell.swift */; };
 		AE9319A525F50B4D00521407 /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319A425F50B4D00521407 /* SegmentedControlCell.swift */; };
+		AE9319AC25F50C5A00521407 /* UIViewController+Containment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		AE93199E25F50B1100521407 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		AE9319A125F50B2A00521407 /* CheckboxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxCell.swift; sourceTree = "<group>"; };
 		AE9319A425F50B4D00521407 /* SegmentedControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
+		AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Containment.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				AE079FB625F16EB500483260 /* UIImage+Loading.swift */,
+				AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				AE9319A525F50B4D00521407 /* SegmentedControlCell.swift in Sources */,
 				AE079FA225F031BD00483260 /* CharactersListRouter.swift in Sources */,
 				AE079F7525F0258000483260 /* AppDelegate.swift in Sources */,
+				AE9319AC25F50C5A00521407 /* UIViewController+Containment.swift in Sources */,
 				AE079F9225F02A8300483260 /* CharactersListInteractor.swift in Sources */,
 				AE079FB725F16EB500483260 /* UIImage+Loading.swift in Sources */,
 				AE079FA625F0499400483260 /* CharactersListConfigurator.swift in Sources */,

@@ -13,6 +13,24 @@ protocol CharactersListViewInput: class {
 }
 
 class CharactersListViewController: UIViewController {
+    
+    private var seasons: [FilterOption] = [
+        FilterOption(title: "1", isSelected: false),
+        FilterOption(title: "2", isSelected: false),
+        FilterOption(title: "3", isSelected: false),
+        FilterOption(title: "4", isSelected: false),
+        FilterOption(title: "5", isSelected: false)
+    ]
+    private var statuses: [FilterOption] = [
+        FilterOption(title: "Alive", isSelected: false),
+        FilterOption(title: "Presumed dead", isSelected: false),
+        FilterOption(title: "Dead", isSelected: false),
+        FilterOption(title: "Deceased", isSelected: false)
+    ]
+    
+    
+    
+    
     var interactor: CharactersListInteractorInput
     var router: CharactersListRouterInput
     
@@ -30,6 +48,26 @@ class CharactersListViewController: UIViewController {
         return indicator
     }()
     
+    private let sortAndFilterContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private var isSortAndFilterVissible: Bool = false {
+        didSet {
+            if isSortAndFilterVissible {
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
+                showSortAndFilter()
+            } else {
+                navigationItem.rightBarButtonItem?.image = UIImage(systemName: "line.horizontal.3.decrease.circle")
+                hideSortAndFilter()
+            }
+        }
+    }
+    
+    private var tableViewLeadingConstraint: NSLayoutConstraint?
+    private var sortAndFilterTrailingConstraint: NSLayoutConstraint?
     private var characters: [Character] = []
     
     init(interactor: CharactersListInteractorInput,
@@ -46,36 +84,90 @@ class CharactersListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Characters"
-        
-        configureTableView()
         configureSubvies()
         
         activityIndicator.startAnimating()
         interactor.viewLoaded()
     }
     
+    private func configureNavigationBar() {
+        title = "Characters"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "line.horizontal.3.decrease.circle"), primaryAction: UIAction(handler: { [weak self] _ in
+            self?.isSortAndFilterVissible.toggle()
+        }), menu: nil)
+    }
+    
     private func configureSubvies() {
-        view.addSubview(tableView)
+        view.backgroundColor = .white
+        configureNavigationBar()
+        configureTableView()
+        configureSortAndFilterView()
+        
         view.addSubview(activityIndicator)
+        
+        let tableViewLeadingConstraint = view.leadingAnchor.constraint(equalTo: tableView.leadingAnchor)
+        self.tableViewLeadingConstraint = tableViewLeadingConstraint
+        let sortAndFilterTrailingConstraint = sortAndFilterContainer.leadingAnchor.constraint(equalTo: view.trailingAnchor)
+        self.sortAndFilterTrailingConstraint = sortAndFilterTrailingConstraint
+        
         NSLayoutConstraint.activate([
-            view.leadingAnchor.constraint(equalTo: tableView.leadingAnchor),
+            // Table view
+            tableViewLeadingConstraint,
             view.topAnchor.constraint(equalTo: tableView.topAnchor),
             view.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
             view.bottomAnchor.constraint(equalTo: tableView.bottomAnchor),
+            
+            // Activity indicator
             view.centerXAnchor.constraint(equalTo: activityIndicator.centerXAnchor),
-            view.centerYAnchor.constraint(equalTo: activityIndicator.centerYAnchor)
+            view.centerYAnchor.constraint(equalTo: activityIndicator.centerYAnchor),
+            
+            // Sort and filter container
+            sortAndFilterContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
+            sortAndFilterContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            sortAndFilterTrailingConstraint,
+            sortAndFilterContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
     private func configureTableView() {
+        view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 84
         let nib = UINib(nibName: "CharactersListCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "CharactersListCell")
     }
+    
+    private func configureSortAndFilterView() {
+        view.addSubview(sortAndFilterContainer)
+        let sortAndFilterViewController = SortAndFilterViewController(seasons: seasons, statuses: statuses)
+        add(sortAndFilterViewController, to: sortAndFilterContainer)
+    }
 }
+
+// MARK: - Sort and Filter container management
+
+extension CharactersListViewController {
+    func showSortAndFilter() {
+        let width = sortAndFilterContainer.frame.width
+        tableViewLeadingConstraint?.constant = 16
+        sortAndFilterTrailingConstraint?.constant = -width
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+        })
+    }
+    
+    func hideSortAndFilter() {
+        tableViewLeadingConstraint?.constant = 0
+        sortAndFilterTrailingConstraint?.constant = 0
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            self?.view.layoutIfNeeded()
+        })
+    }
+}
+
+// MARK: - CharactersListViewInput
 
 extension CharactersListViewController: CharactersListViewInput {
     func update(with characters: [Character]) {
@@ -92,7 +184,7 @@ extension CharactersListViewController: CharactersListViewInput {
     }
 }
 
-// MARK: UITableViewDelegate, UITableViewDataSource
+// MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension CharactersListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

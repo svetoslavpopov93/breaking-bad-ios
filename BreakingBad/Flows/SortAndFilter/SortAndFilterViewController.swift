@@ -19,19 +19,8 @@ class SortAndFilterViewController: UIViewController {
         return tableView
     }()
     
-    private var seasons: [FilterOption] = [
-        FilterOption(title: "1", isSelected: false),
-        FilterOption(title: "2", isSelected: false),
-        FilterOption(title: "3", isSelected: false),
-        FilterOption(title: "4", isSelected: false),
-        FilterOption(title: "5", isSelected: false)
-    ]
-    private var statuses: [FilterOption] = [
-        FilterOption(title: "Alive", isSelected: false),
-        FilterOption(title: "Presumed dead", isSelected: false),
-        FilterOption(title: "Dead", isSelected: false),
-        FilterOption(title: "Deceased", isSelected: false)
-    ]
+    private var seasons: [FilterOption]
+    private var statuses: [FilterOption]
     
     private enum Section: Int, CaseIterable {
         case sort
@@ -49,9 +38,19 @@ class SortAndFilterViewController: UIViewController {
         case status
     }
     
+    init(seasons: [FilterOption], statuses: [FilterOption]) {
+        self.seasons = seasons
+        self.statuses = statuses
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        configureSubviews()
     }
     
     private func configureSubviews() {
