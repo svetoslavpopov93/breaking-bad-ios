@@ -13,7 +13,6 @@ protocol CharactersListViewInput: class {
 }
 
 class CharactersListViewController: UIViewController {
-    
     private var seasons: [FilterOption] = [
         FilterOption(title: "1", isSelected: false),
         FilterOption(title: "2", isSelected: false),
@@ -46,6 +45,12 @@ class CharactersListViewController: UIViewController {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
+    }()
+    
+    private let blurView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let sortAndFilterContainer: UIView = {
@@ -89,15 +94,11 @@ class CharactersListViewController: UIViewController {
         activityIndicator.startAnimating()
         interactor.viewLoaded()
     }
-    
-    private func configureNavigationBar() {
-        title = "Characters"
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "line.horizontal.3.decrease.circle"), primaryAction: UIAction(handler: { [weak self] _ in
-            self?.isSortAndFilterVissible.toggle()
-        }), menu: nil)
-    }
-    
+}
+
+// MARK: - Configuration
+
+extension CharactersListViewController {
     private func configureSubvies() {
         view.backgroundColor = .white
         configureNavigationBar()
@@ -122,12 +123,27 @@ class CharactersListViewController: UIViewController {
             view.centerXAnchor.constraint(equalTo: activityIndicator.centerXAnchor),
             view.centerYAnchor.constraint(equalTo: activityIndicator.centerYAnchor),
             
+            // Blur view
+            
+            view.topAnchor.constraint(equalTo: blurView.topAnchor),
+            view.leadingAnchor.constraint(equalTo: blurView.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: blurView.trailingAnchor),
+            view.bottomAnchor.constraint(equalTo: blurView.bottomAnchor),
+            
             // Sort and filter container
             sortAndFilterContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
             sortAndFilterContainer.topAnchor.constraint(equalTo: view.topAnchor),
             sortAndFilterTrailingConstraint,
             sortAndFilterContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+    
+    private func configureNavigationBar() {
+        title = "Characters"
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "line.horizontal.3.decrease.circle"), primaryAction: UIAction(handler: { [weak self] _ in
+            self?.toggleSortAndFilterView()
+        }), menu: nil)
     }
     
     private func configureTableView() {
@@ -140,6 +156,12 @@ class CharactersListViewController: UIViewController {
     }
     
     private func configureSortAndFilterView() {
+        blurView.isHidden = true
+        blurView.backgroundColor = .clear
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleSortAndFilterView))
+        blurView.addGestureRecognizer(gestureRecognizer)
+        
+        view.addSubview(blurView)
         view.addSubview(sortAndFilterContainer)
         let sortAndFilterViewController = SortAndFilterViewController(seasons: seasons, statuses: statuses)
         add(sortAndFilterViewController, to: sortAndFilterContainer)
@@ -149,20 +171,31 @@ class CharactersListViewController: UIViewController {
 // MARK: - Sort and Filter container management
 
 extension CharactersListViewController {
-    func showSortAndFilter() {
+    @objc private func toggleSortAndFilterView() {
+        isSortAndFilterVissible.toggle()
+    }
+    
+    private func showSortAndFilter() {
         let width = sortAndFilterContainer.frame.width
         tableViewLeadingConstraint?.constant = 16
         sortAndFilterTrailingConstraint?.constant = -width
+        
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            self?.blurView.isHidden = false
+            self?.blurView.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
             self?.view.layoutIfNeeded()
         })
     }
     
-    func hideSortAndFilter() {
+    private func hideSortAndFilter() {
         tableViewLeadingConstraint?.constant = 0
         sortAndFilterTrailingConstraint?.constant = 0
+        
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            self?.blurView.backgroundColor = .clear
             self?.view.layoutIfNeeded()
+        }, completion: { [weak self] _ in
+            self?.blurView.isHidden = true
         })
     }
 }
