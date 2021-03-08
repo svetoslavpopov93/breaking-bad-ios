@@ -11,14 +11,16 @@ import SDWebImage
 class CharactersListCell: UITableViewCell {
     private let mainStackView: UIStackView
     private let thumbnailImage: UIImageView
-    private let label: UILabel
+    private let nameLabel: UILabel
+    private let nicknameLabel: UILabel
     
     private var resultHandler: ((Bool) -> Void)?
     
     required init?(coder aDecoder: NSCoder) {
         mainStackView = UIStackView()
         thumbnailImage = UIImageView()
-        label = UILabel()
+        nameLabel = UILabel()
+        nicknameLabel = UILabel()
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -26,7 +28,8 @@ class CharactersListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String!) {
         mainStackView = UIStackView()
         thumbnailImage = UIImageView()
-        label = UILabel()
+        nameLabel = UILabel()
+        nicknameLabel = UILabel()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
     }
@@ -34,14 +37,21 @@ class CharactersListCell: UITableViewCell {
     private func commonInit() {
         thumbnailImage.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nicknameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         mainStackView.addArrangedSubview(thumbnailImage)
-        mainStackView.addArrangedSubview(label)
+        mainStackView.alignment = .center
         mainStackView.axis = .horizontal
         mainStackView.isLayoutMarginsRelativeArrangement = true
         mainStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 10)
         mainStackView.spacing = 8
         mainStackView.backgroundColor = .green
+        
+        let labelsStackView = UIStackView(arrangedSubviews: [nameLabel, nicknameLabel])
+        labelsStackView.axis = .vertical
+        
+        mainStackView.addArrangedSubview(labelsStackView)
         contentView.addSubview(mainStackView)
         
         NSLayoutConstraint.activate([
@@ -51,11 +61,19 @@ class CharactersListCell: UITableViewCell {
             mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+            nameLabel.heightAnchor.constraint(equalTo: nicknameLabel.heightAnchor)
         ])
     }
     
-    func configure(with imageUrl: String?, name: String?) {
-        label.text = name
+    func configure(with imageUrl: String?, name: String?, nickname: String?) {
+        nameLabel.text = name
+        nameLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        
+        if let nickname = nickname {
+            nicknameLabel.text = "\"\(nickname)\""
+            nicknameLabel.font = .systemFont(ofSize: 12, weight: .regular)
+        }
+        
         thumbnailImage.contentMode = .scaleAspectFill
         thumbnailImage.sd_setImage(with: URL(string: imageUrl ?? ""),
                                    placeholderImage: UIImage(systemName: "person.fill"),

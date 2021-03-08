@@ -40,6 +40,12 @@ class CharactersListViewController: UIViewController {
     var interactor: CharactersListInteractorInput
     var router: CharactersListRouterInput
     
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Characters"
+        return label
+    }()
+    
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +84,19 @@ class CharactersListViewController: UIViewController {
         }
     }
     
+    private var isSearchVisible: Bool = false {
+        didSet {
+            searchController.searchBar.isHidden = !isSearchVisible
+            if isSearchVisible {
+                navigationItem.leftBarButtonItem?.image = UIImage(systemName: "magnifyingglass.circle.fill")
+                navigationItem.titleView = searchController.searchBar
+            } else {
+                navigationItem.leftBarButtonItem?.image = UIImage(systemName: "magnifyingglass.circle")
+                navigationItem.titleView = titleLabel
+            }
+        }
+    }
+    
     private let searchController = UISearchController()
     private var tableViewLeadingConstraint: NSLayoutConstraint?
     private var sortAndFilterTrailingConstraint: NSLayoutConstraint?
@@ -98,7 +117,6 @@ class CharactersListViewController: UIViewController {
         super.viewDidLoad()
         
         configureSubvies()
-        
         activityIndicator.startAnimating()
         interactor.viewLoaded(with: sortAndFilterOptions)
     }
@@ -148,19 +166,30 @@ extension CharactersListViewController {
     }
     
     private func configureNavigationBar() {
-        title = "Characters"
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "line.horizontal.3.decrease.circle"), primaryAction: UIAction(handler: { [weak self] _ in
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: nil, image: UIImage(systemName: "line.horizontal.3.decrease.circle"),
+                                                            primaryAction: UIAction(handler: { [weak self] _ in
             self?.toggleSortAndFilterView()
         }), menu: nil)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: nil,
+                                                           image: UIImage(systemName: "magnifyingglass.circle"),
+                                                           primaryAction: UIAction(handler: { [weak self] _ in
+                                                            self?.isSearchVisible.toggle()
+                                                           }),
+                                                           menu: nil)
     }
     
     private func configureSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search character"
-        navigationItem.searchController = searchController
+        
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.navigationItem.titleView = searchController.searchBar
+        self.definesPresentationContext = true
         definesPresentationContext = true
+        
+        isSearchVisible = false
     }
     
     private func configureTableView() {
@@ -202,7 +231,6 @@ extension CharactersListViewController {
         let width = sortAndFilterContainer.frame.width
         tableViewLeadingConstraint?.constant = 16
         sortAndFilterTrailingConstraint?.constant = -width
-        
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             self?.blurView.isHidden = false
             self?.blurView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
@@ -213,7 +241,6 @@ extension CharactersListViewController {
     private func hideSortAndFilter() {
         tableViewLeadingConstraint?.constant = 0
         sortAndFilterTrailingConstraint?.constant = 0
-        
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             self?.blurView.backgroundColor = .clear
             self?.view.layoutIfNeeded()
@@ -229,8 +256,9 @@ extension CharactersListViewController: CharactersListViewInput {
     func update(with characters: [Character]) {
         self.characters = characters
         DispatchQueue.main.async { [weak self] in
-            self?.activityIndicator.stopAnimating()
-            self?.tableView.reloadData()
+            guard let strongSelf = self else { return }
+            strongSelf.activityIndicator.stopAnimating()
+            strongSelf.tableView.reloadData()
         }
     }
     
@@ -257,7 +285,7 @@ extension CharactersListViewController: UITableViewDelegate, UITableViewDataSour
         }
         let character = characters[indexPath.row]
         
-        cell.configure(with: character.imageUrl, name: character.name)
+        cell.configure(with: character.imageUrl, name: character.name, nickname: character.nickname)
         cell.selectionStyle = .none
         return cell
     }
