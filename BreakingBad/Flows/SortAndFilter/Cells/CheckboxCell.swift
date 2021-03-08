@@ -28,6 +28,8 @@ class CheckboxCell: UITableViewCell {
     }
     
     private func commonInit() {
+        contentView.backgroundColor = ColorPalette.backgroundColor
+        label.textColor = ColorPalette.activeColor
         button.translatesAutoresizingMaskIntoConstraints = false
         
         let stackview = UIStackView(arrangedSubviews: [button, label])
@@ -36,10 +38,12 @@ class CheckboxCell: UITableViewCell {
         stackview.isLayoutMarginsRelativeArrangement = true
         stackview.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16)
         stackview.spacing = 8
+        stackview.backgroundColor = ColorPalette.backgroundColor
         contentView.addSubview(stackview)
         
-        button.setImage(UIImage(systemName: "checkmark.circle"), for: .selected)
-        button.setImage(UIImage(systemName: "circle"), for: .normal)
+        button.setImage(UIImage(systemName: "checkmark.circle.fill")?.withRenderingMode(.alwaysTemplate), for: .selected)
+        button.setImage(UIImage(systemName: "circle")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = ColorPalette.activeColor
         button.addTarget(self, action: #selector(userDidTapCheckbox), for: .touchUpInside)
         
         NSLayoutConstraint.activate([

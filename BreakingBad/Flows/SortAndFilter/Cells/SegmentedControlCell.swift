@@ -28,7 +28,18 @@ class SegmentedControlCell: UITableViewCell {
     }
     
     private func commonInit() {
+        contentView.backgroundColor = ColorPalette.backgroundColor
+        
+        segmentedControl.backgroundColor = ColorPalette.backgroundColor
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.tintColor = .red
+        segmentedControl.selectedSegmentTintColor = ColorPalette.activeColor
+        segmentedControl.layer.borderColor = ColorPalette.activeColor.cgColor
+        segmentedControl.selectedSegmentTintColor = ColorPalette.activeColor
+        segmentedControl.layer.borderWidth = 1
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ColorPalette.activeColor], for:.normal)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: ColorPalette.backgroundColor], for:.selected)
+        
         contentView.addSubview(segmentedControl)
         segmentedControl.addTarget(self, action: #selector(SegmentedControlCell.valueChanged), for: .valueChanged)
         

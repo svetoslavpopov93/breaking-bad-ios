@@ -35,6 +35,7 @@ class CharactersListCell: UITableViewCell {
     }
     
     private func commonInit() {
+        contentView.backgroundColor = ColorPalette.backgroundColor
         thumbnailImage.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +47,7 @@ class CharactersListCell: UITableViewCell {
         mainStackView.isLayoutMarginsRelativeArrangement = true
         mainStackView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 10)
         mainStackView.spacing = 8
-        mainStackView.backgroundColor = .green
+        mainStackView.backgroundColor = UIColor(red: 18/255, green: 18/255, blue: 18/255, alpha: 1)
         
         let labelsStackView = UIStackView(arrangedSubviews: [nameLabel, nicknameLabel])
         labelsStackView.axis = .vertical
@@ -67,10 +68,12 @@ class CharactersListCell: UITableViewCell {
     
     func configure(with imageUrl: String?, name: String?, nickname: String?) {
         nameLabel.text = name
+        nameLabel.textColor = ColorPalette.activeColor
         nameLabel.font = .systemFont(ofSize: 16, weight: .bold)
         
         if let nickname = nickname {
             nicknameLabel.text = "\"\(nickname)\""
+            nicknameLabel.textColor = ColorPalette.activeColor
             nicknameLabel.font = .systemFont(ofSize: 12, weight: .regular)
         }
         

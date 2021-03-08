@@ -43,6 +43,7 @@ class CharactersListViewController: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Characters"
+        label.textColor = ColorPalette.activeColor
         return label
     }()
     
@@ -126,7 +127,7 @@ class CharactersListViewController: UIViewController {
 
 extension CharactersListViewController {
     private func configureSubvies() {
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.backgroundColor
         configureNavigationBar()
         configureSearchController()
         configureTableView()
@@ -170,6 +171,7 @@ extension CharactersListViewController {
                                                             primaryAction: UIAction(handler: { [weak self] _ in
             self?.toggleSortAndFilterView()
         }), menu: nil)
+        navigationItem.rightBarButtonItem?.tintColor = ColorPalette.activeColor
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: nil,
                                                            image: UIImage(systemName: "magnifyingglass.circle"),
@@ -177,6 +179,8 @@ extension CharactersListViewController {
                                                             self?.isSearchVisible.toggle()
                                                            }),
                                                            menu: nil)
+        navigationItem.leftBarButtonItem?.tintColor = ColorPalette.activeColor
+        navigationController?.navigationBar.barTintColor = ColorPalette.backgroundColor
     }
     
     private func configureSearchController() {
@@ -189,10 +193,14 @@ extension CharactersListViewController {
         self.definesPresentationContext = true
         definesPresentationContext = true
         
+        searchController.searchBar.tintColor = ColorPalette.activeColor
+        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = ColorPalette.activeColor
         isSearchVisible = false
     }
     
     private func configureTableView() {
+        tableView.backgroundColor = ColorPalette.backgroundColor
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self

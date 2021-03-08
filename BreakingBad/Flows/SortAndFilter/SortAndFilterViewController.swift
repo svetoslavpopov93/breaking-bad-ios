@@ -87,6 +87,8 @@ class SortAndFilterViewController: UIViewController {
     }
     
     private func configureSubviews() {
+        view.backgroundColor = ColorPalette.backgroundColor
+        tableView.backgroundColor = ColorPalette.backgroundColor
         configureTableView()
         
         NSLayoutConstraint.activate([

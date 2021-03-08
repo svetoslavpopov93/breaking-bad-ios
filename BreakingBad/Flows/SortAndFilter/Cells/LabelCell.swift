@@ -23,6 +23,8 @@ class LabelCell: UITableViewCell {
     }
 
     private func commonInit() {
+        contentView.backgroundColor = ColorPalette.backgroundColor
+        label.textColor = ColorPalette.activeColor
         label.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(label)
         

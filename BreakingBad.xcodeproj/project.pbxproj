@@ -19,6 +19,7 @@
 		AE079FA225F031BD00483260 /* CharactersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA125F031BD00483260 /* CharactersListRouter.swift */; };
 		AE079FA625F0499400483260 /* CharactersListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA525F0499400483260 /* CharactersListConfigurator.swift */; };
 		AE079FB125F16B6000483260 /* CharactersListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB025F16B6000483260 /* CharactersListCell.swift */; };
+		AE79A32A25F65AF600A740C1 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE79A32925F65AF600A740C1 /* ColorPalette.swift */; };
 		AE93199B25F509A300521407 /* SortAndFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199A25F509A300521407 /* SortAndFilterViewController.swift */; };
 		AE93199F25F50B1100521407 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199E25F50B1100521407 /* LabelCell.swift */; };
 		AE9319A225F50B2A00521407 /* CheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319A125F50B2A00521407 /* CheckboxCell.swift */; };
@@ -45,6 +46,7 @@
 		AE079FA125F031BD00483260 /* CharactersListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListRouter.swift; sourceTree = "<group>"; };
 		AE079FA525F0499400483260 /* CharactersListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListConfigurator.swift; sourceTree = "<group>"; };
 		AE079FB025F16B6000483260 /* CharactersListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListCell.swift; sourceTree = "<group>"; };
+		AE79A32925F65AF600A740C1 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		AE93199A25F509A300521407 /* SortAndFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFilterViewController.swift; sourceTree = "<group>"; };
 		AE93199E25F50B1100521407 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		AE9319A125F50B2A00521407 /* CheckboxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxCell.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */,
+				AE79A32925F65AF600A740C1 /* ColorPalette.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE79A32A25F65AF600A740C1 /* ColorPalette.swift in Sources */,
 				AE93199B25F509A300521407 /* SortAndFilterViewController.swift in Sources */,
 				AE079F9F25F02BEA00483260 /* CharactersListViewController.swift in Sources */,
 				AE079F9C25F02B6D00483260 /* CharactersListPresenter.swift in Sources */,

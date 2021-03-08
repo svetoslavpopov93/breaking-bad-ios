@@ -34,7 +34,7 @@ class CharacterPreviewViewController: UIViewController {
     private let imageContainerView: UIView = {
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = .black
+        container.backgroundColor = ColorPalette.backgroundColor
         return container
     }()
     
@@ -66,7 +66,7 @@ class CharacterPreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = ColorPalette.backgroundColor
         configureSubvies()
     }
     
@@ -76,12 +76,12 @@ class CharacterPreviewViewController: UIViewController {
         if !(namesShadowView.layer.sublayers?.contains(gradientLayer) ?? false) {
             view.layoutIfNeeded()
             gradientLayer.frame = namesShadowView.bounds
-            gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+            gradientLayer.colors = [UIColor.clear.cgColor, ColorPalette.backgroundColor.cgColor]
             namesShadowView.layer.insertSublayer(gradientLayer, at: 0)
         }
         
         closeButton.layer.cornerRadius = closeButton.bounds.height / 2
-        closeButton.backgroundColor = UIColor.white.withAlphaComponent(0.4)
+        closeButton.backgroundColor = ColorPalette.activeColor.withAlphaComponent(0.4)
     }
     
     private func configureSubvies() {
@@ -91,7 +91,7 @@ class CharacterPreviewViewController: UIViewController {
         configureStatusAndAppearancesLabels()
         
         let placeholderView = UIView()
-        placeholderView.backgroundColor = .black
+        placeholderView.backgroundColor = ColorPalette.backgroundColor
         
         stackView.addArrangedSubview(placeholderView)
         NSLayoutConstraint.activate([
@@ -137,13 +137,13 @@ class CharacterPreviewViewController: UIViewController {
         }), for: .touchUpInside)
         
         let nicknameLabel = UILabel()
-        nicknameLabel.textColor = .white
+        nicknameLabel.textColor = ColorPalette.activeColor
         nicknameLabel.text = character.nickname
         nicknameLabel.font = .systemFont(ofSize: 34, weight: .bold)
         namesStackView.addArrangedSubview(nicknameLabel)
         
         let nameLabel = UILabel()
-        nameLabel.textColor = .white
+        nameLabel.textColor = ColorPalette.activeColor
         nameLabel.text = "Actor: \(character.name ?? "")"
         namesStackView.addArrangedSubview(nameLabel)
         imageContainerView.addSubview(namesStackView)
@@ -160,7 +160,7 @@ class CharacterPreviewViewController: UIViewController {
     
     private func configureStatusAndAppearancesLabels() {
         let appearancesLabel = UILabel()
-        appearancesLabel.textColor = .white
+        appearancesLabel.textColor = ColorPalette.activeColor
         appearancesLabel.translatesAutoresizingMaskIntoConstraints = false
         appearancesLabel.setContentHuggingPriority(.required, for: .horizontal)
         let seasons: [Season]? = character.seasons?.allObjects as? [Season]
@@ -172,13 +172,13 @@ class CharacterPreviewViewController: UIViewController {
         appearancesLabel.font = .systemFont(ofSize: 14)
         
         let statusLabel = UILabel()
-        statusLabel.textColor = .white
+        statusLabel.textColor = ColorPalette.activeColor
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.text = "Status: \(character.status ?? "")"
         statusLabel.font = .systemFont(ofSize: 14)
         
         let occupationLabel = UILabel()
-        occupationLabel.textColor = .white
+        occupationLabel.textColor = ColorPalette.activeColor
         occupationLabel.translatesAutoresizingMaskIntoConstraints = false
         occupationLabel.numberOfLines = 0
         let occupation = character.occupation ?? []
