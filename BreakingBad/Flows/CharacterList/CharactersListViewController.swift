@@ -77,6 +77,9 @@ class CharactersListViewController: UIViewController {
             if isSortAndFilterVissible {
                 navigationItem.rightBarButtonItem?.image = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
                 showSortAndFilter()
+                if isSearchVisible {
+                    isSearchVisible = false
+                }
             } else {
                 navigationItem.rightBarButtonItem?.image = UIImage(systemName: "line.horizontal.3.decrease.circle")
                 hideSortAndFilter()
@@ -90,6 +93,9 @@ class CharactersListViewController: UIViewController {
             if isSearchVisible {
                 navigationItem.leftBarButtonItem?.image = UIImage(systemName: "magnifyingglass.circle.fill")
                 navigationItem.titleView = searchController.searchBar
+                if isSortAndFilterVissible {
+                    isSortAndFilterVissible = false
+                }
             } else {
                 navigationItem.leftBarButtonItem?.image = UIImage(systemName: "magnifyingglass.circle")
                 navigationItem.titleView = titleLabel
@@ -188,10 +194,11 @@ extension CharactersListViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search character"
+        searchController.delegate = self
         
-        self.searchController.hidesNavigationBarDuringPresentation = false
-        self.navigationItem.titleView = searchController.searchBar
-        self.definesPresentationContext = true
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.titleView = searchController.searchBar
+        definesPresentationContext = true
         definesPresentationContext = true
         
         searchController.searchBar.tintColor = ColorPalette.activeColor
@@ -297,6 +304,14 @@ extension CharactersListViewController: UITableViewDelegate, UITableViewDataSour
         cell.configure(with: character.imageUrl, name: character.name, nickname: character.nickname)
         cell.selectionStyle = .none
         return cell
+    }
+}
+
+// MARK: - UISearchControllerDelegate
+
+extension CharactersListViewController: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        isSearchVisible = false
     }
 }
 

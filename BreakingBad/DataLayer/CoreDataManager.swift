@@ -7,9 +7,17 @@
 
 import CoreData
 
-class CoreDataManager {
-    static let sharedInstance: CoreDataManager = CoreDataManager()
-    
+protocol CoreDataManagerProtocol {
+    @discardableResult
+    func insert<T: NSManagedObject>(setupBlock: ((T) -> Void)) -> T
+    var context: NSManagedObjectContext { get }
+    func checkIfExists<T: NSManagedObject>(of type: T.Type, predicate: NSPredicate) -> Bool
+    func find<T: NSManagedObject>(with predicate: NSPredicate) -> [T]?
+    func saveContext()
+    func fetchedResultsController<T: NSManagedObject>(with sortDescriptors: [NSSortDescriptor]) -> NSFetchedResultsController<T>
+}
+
+class CoreDataManager: CoreDataManagerProtocol {
     private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "BreakingBad")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -42,6 +50,15 @@ class CoreDataManager {
         request.predicate = predicate
         let results: [T]? = try? context.fetch(request) as? [T]
         return results
+    }
+    
+    func fetchedResultsController<T>(with sortDescriptors: [NSSortDescriptor]) -> NSFetchedResultsController<T> where T : NSFetchRequestResult {
+        let request = NSFetchRequest<T>(entityName: String(describing: T.self))
+        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        return NSFetchedResultsController(fetchRequest: request,
+                                          managedObjectContext: context,
+                                          sectionNameKeyPath: nil,
+                                          cacheName: nil)
     }
     
     func saveContext () {

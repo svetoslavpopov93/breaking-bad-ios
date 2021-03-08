@@ -24,20 +24,17 @@ enum BreakingBadError: Error {
 
 class CharactersListInteractor: NSObject {
     let presenter: CharactersListInteractorOutput
-    let coreDataManager = CoreDataManager.sharedInstance
+    let coreDataManager: CoreDataManagerProtocol
     let webHandler: WebHandlerProtocol
     let fetchedResultsController: NSFetchedResultsController<Character>
     
     init(presenter: CharactersListInteractorOutput,
+         coreDataManager: CoreDataManagerProtocol,
          webHandler: WebHandlerProtocol) {
         self.presenter = presenter
+        self.coreDataManager = coreDataManager
         self.webHandler = webHandler
-        let request = NSFetchRequest<Character>(entityName: "Character")
-        request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                              managedObjectContext: coreDataManager.context,
-                                                              sectionNameKeyPath: nil,
-                                                              cacheName: nil)
+        fetchedResultsController = coreDataManager.fetchedResultsController(with: [NSSortDescriptor(key: "name", ascending: true)])
         super.init()
         fetchedResultsController.delegate = self
     }
@@ -46,7 +43,7 @@ class CharactersListInteractor: NSObject {
         do {
             try fetchedResultsController.performFetch()
         } catch {
-            fatalError("Unable to fetch the profiles... Error: \(error.localizedDescription)")
+            presenter.didFailToUpdateCharacters()
         }
     }
 }

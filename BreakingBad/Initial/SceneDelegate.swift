@@ -10,10 +10,11 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private var navigationController = UINavigationController()
+    private let coreDataManager = CoreDataManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let viewController = CharactersListConfigurator.configure(navigationController: navigationController)
+        let viewController = CharactersListConfigurator.configure(with: navigationController, coreDataManager: coreDataManager)
         navigationController.viewControllers = [viewController]
         window = UIWindow()
 
@@ -24,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
-        CoreDataManager.sharedInstance.saveContext()
+        coreDataManager.saveContext()
     }
 }
 

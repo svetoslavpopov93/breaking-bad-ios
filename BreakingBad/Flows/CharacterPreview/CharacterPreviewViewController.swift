@@ -95,7 +95,7 @@ class CharacterPreviewViewController: UIViewController {
         
         stackView.addArrangedSubview(placeholderView)
         NSLayoutConstraint.activate([
-            // Stakc view
+            // Stack view
             view.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             view.topAnchor.constraint(equalTo: stackView.topAnchor),
             view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),

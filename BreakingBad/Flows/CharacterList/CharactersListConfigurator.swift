@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 class CharactersListConfigurator {
-    static func configure(navigationController: UINavigationController) -> UIViewController {
+    static func configure(with navigationController: UINavigationController, coreDataManager: CoreDataManagerProtocol) -> UIViewController {
         let router = CharactersListRouter(navigationController: navigationController)
         let presenter = CharactersListPresenter()
-        let interactor = CharactersListInteractor(presenter: presenter, webHandler: WebHandler())
+        let interactor = CharactersListInteractor(presenter: presenter, coreDataManager: coreDataManager, webHandler: WebHandler())
         let viewController = CharactersListViewController(interactor: interactor, router: router)
         presenter.view = viewController
         return viewController
