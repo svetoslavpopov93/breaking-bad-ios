@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,8 +19,6 @@
 		AE079FA225F031BD00483260 /* CharactersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA125F031BD00483260 /* CharactersListRouter.swift */; };
 		AE079FA625F0499400483260 /* CharactersListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA525F0499400483260 /* CharactersListConfigurator.swift */; };
 		AE079FB125F16B6000483260 /* CharactersListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB025F16B6000483260 /* CharactersListCell.swift */; };
-		AE079FB425F16B8E00483260 /* CharactersListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE079FB325F16B8E00483260 /* CharactersListCell.xib */; };
-		AE079FB725F16EB500483260 /* UIImage+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB625F16EB500483260 /* UIImage+Loading.swift */; };
 		AE93199B25F509A300521407 /* SortAndFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199A25F509A300521407 /* SortAndFilterViewController.swift */; };
 		AE93199F25F50B1100521407 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199E25F50B1100521407 /* LabelCell.swift */; };
 		AE9319A225F50B2A00521407 /* CheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319A125F50B2A00521407 /* CheckboxCell.swift */; };
@@ -28,9 +26,11 @@
 		AE9319AC25F50C5A00521407 /* UIViewController+Containment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */; };
 		AE9319B125F53D9700521407 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319B025F53D9700521407 /* CoreDataManager.swift */; };
 		AE9319B525F53DA500521407 /* BreakingBad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE9319B325F53DA500521407 /* BreakingBad.xcdatamodeld */; };
+		EFB1C32AD9429D6F37CA346B /* Pods_BreakingBad.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFA0B57EDD798BE8DB47237A /* Pods_BreakingBad.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		585E9620674E465AD5198727 /* Pods-BreakingBad.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingBad.release.xcconfig"; path = "Target Support Files/Pods-BreakingBad/Pods-BreakingBad.release.xcconfig"; sourceTree = "<group>"; };
 		AE00501F25F1A09C004D3181 /* CharacterPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterPreviewViewController.swift; sourceTree = "<group>"; };
 		AE079F7125F0258000483260 /* BreakingBad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakingBad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE079F7425F0258000483260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,8 +45,6 @@
 		AE079FA125F031BD00483260 /* CharactersListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListRouter.swift; sourceTree = "<group>"; };
 		AE079FA525F0499400483260 /* CharactersListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListConfigurator.swift; sourceTree = "<group>"; };
 		AE079FB025F16B6000483260 /* CharactersListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListCell.swift; sourceTree = "<group>"; };
-		AE079FB325F16B8E00483260 /* CharactersListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharactersListCell.xib; sourceTree = "<group>"; };
-		AE079FB625F16EB500483260 /* UIImage+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Loading.swift"; sourceTree = "<group>"; };
 		AE93199A25F509A300521407 /* SortAndFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFilterViewController.swift; sourceTree = "<group>"; };
 		AE93199E25F50B1100521407 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		AE9319A125F50B2A00521407 /* CheckboxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxCell.swift; sourceTree = "<group>"; };
@@ -54,6 +52,8 @@
 		AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Containment.swift"; sourceTree = "<group>"; };
 		AE9319B025F53D9700521407 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		AE9319B425F53DA500521407 /* BreakingBad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BreakingBad.xcdatamodel; sourceTree = "<group>"; };
+		BFA0B57EDD798BE8DB47237A /* Pods_BreakingBad.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BreakingBad.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDE1CA111BFB769CD8FA3B7D /* Pods-BreakingBad.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BreakingBad.debug.xcconfig"; path = "Target Support Files/Pods-BreakingBad/Pods-BreakingBad.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,17 +61,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFB1C32AD9429D6F37CA346B /* Pods_BreakingBad.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		596061F121C17C37F1394C46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BFA0B57EDD798BE8DB47237A /* Pods_BreakingBad.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		89CBBFB4F972856BEBDBFC6C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FDE1CA111BFB769CD8FA3B7D /* Pods-BreakingBad.debug.xcconfig */,
+				585E9620674E465AD5198727 /* Pods-BreakingBad.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		AE079F6825F0258000483260 = {
 			isa = PBXGroup;
 			children = (
 				AE079F7325F0258000483260 /* BreakingBad */,
 				AE079F7225F0258000483260 /* Products */,
+				89CBBFB4F972856BEBDBFC6C /* Pods */,
+				596061F121C17C37F1394C46 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,7 +178,6 @@
 		AE29335925F301CE006A4449 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				AE079FB625F16EB500483260 /* UIImage+Loading.swift */,
 				AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */,
 			);
 			path = Utility;
@@ -187,7 +206,6 @@
 			isa = PBXGroup;
 			children = (
 				AE079FB025F16B6000483260 /* CharactersListCell.swift */,
-				AE079FB325F16B8E00483260 /* CharactersListCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -199,9 +217,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE079F8825F0258100483260 /* Build configuration list for PBXNativeTarget "BreakingBad" */;
 			buildPhases = (
+				79540D8D2ADAE8F9626C271B /* [CP] Check Pods Manifest.lock */,
 				AE079F6D25F0258000483260 /* Sources */,
 				AE079F6E25F0258000483260 /* Frameworks */,
 				AE079F6F25F0258000483260 /* Resources */,
+				A69DC663871E72DC2BE62EBA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -249,7 +269,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE079FB425F16B8E00483260 /* CharactersListCell.xib in Resources */,
 				AE079F8425F0258100483260 /* LaunchScreen.storyboard in Resources */,
 				AE079F8125F0258100483260 /* Assets.xcassets in Resources */,
 				AE079F7C25F0258000483260 /* Main.storyboard in Resources */,
@@ -257,6 +276,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		79540D8D2ADAE8F9626C271B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-BreakingBad-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A69DC663871E72DC2BE62EBA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BreakingBad/Pods-BreakingBad-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BreakingBad/Pods-BreakingBad-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BreakingBad/Pods-BreakingBad-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AE079F6D25F0258000483260 /* Sources */ = {
@@ -275,7 +336,6 @@
 				AE079F7525F0258000483260 /* AppDelegate.swift in Sources */,
 				AE9319AC25F50C5A00521407 /* UIViewController+Containment.swift in Sources */,
 				AE079F9225F02A8300483260 /* CharactersListInteractor.swift in Sources */,
-				AE079FB725F16EB500483260 /* UIImage+Loading.swift in Sources */,
 				AE079FA625F0499400483260 /* CharactersListConfigurator.swift in Sources */,
 				AE00502025F1A09C004D3181 /* CharacterPreviewViewController.swift in Sources */,
 				AE079FB125F16B6000483260 /* CharactersListCell.swift in Sources */,
@@ -423,6 +483,7 @@
 		};
 		AE079F8925F0258100483260 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FDE1CA111BFB769CD8FA3B7D /* Pods-BreakingBad.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -441,6 +502,7 @@
 		};
 		AE079F8A25F0258100483260 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 585E9620674E465AD5198727 /* Pods-BreakingBad.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

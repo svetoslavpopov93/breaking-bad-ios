@@ -145,10 +145,10 @@ class CharacterPreviewViewController: UIViewController {
         imageContainerView.addSubview(namesStackView)
         
         imageView.clipsToBounds = true
-        imageView.downloadFromURL(character.imageUrl ?? "", failureBlock: { [weak imageView] in
-            imageView?.image = UIImage(systemName: "person.fill.xmark")?.withRenderingMode(.alwaysTemplate)
-            imageView?.tintColor = .red
-        })
+        imageView.sd_setImage(with: URL(string: character.imageUrl ?? ""),
+                              placeholderImage: UIImage(systemName: "person.fill"),
+                              options: .continueInBackground,
+                              context: [:])
         
         stackView.addArrangedSubview(imageContainerView)
     }

@@ -167,9 +167,9 @@ extension CharactersListViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 84
-        let nib = UINib(nibName: "CharactersListCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "CharactersListCell")
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        tableView.register(CharactersListCell.self, forCellReuseIdentifier: "CharactersListCell")
     }
     
     private func configureSortAndFilterView() {
@@ -256,6 +256,7 @@ extension CharactersListViewController: UITableViewDelegate, UITableViewDataSour
             return UITableViewCell()
         }
         let character = characters[indexPath.row]
+        
         cell.configure(with: character.imageUrl, name: character.name)
         cell.selectionStyle = .none
         return cell
