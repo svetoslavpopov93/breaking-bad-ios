@@ -9,7 +9,7 @@ import CoreData
 
 protocol CharactersListInteractorInput: class {
     func viewLoaded(with options: SortAndFilterOptions)
-    func applySortAndFilterOptions(_ options: SortAndFilterOptions)
+    func applyOptions(_ options: SortAndFilterOptions, searchQuery: String?)
 }
 
 protocol CharactersListInteractorOutput: class {
@@ -21,7 +21,7 @@ enum BreakingBadError: Error {
     case downloadFailure
 }
 
-class CharactersListInteractor: NSObject, CharactersListInteractorInput {
+class CharactersListInteractor: NSObject {
     let presenter: CharactersListInteractorOutput
     let coreDataManager = CoreDataManager.sharedInstance
     let fetchedResultsController: NSFetchedResultsController<Character>
@@ -38,14 +38,18 @@ class CharactersListInteractor: NSObject, CharactersListInteractorInput {
         fetchedResultsController.delegate = self
     }
     
-    func fetchData() {
+    private func fetchData() {
         do {
             try fetchedResultsController.performFetch()
         } catch {
             fatalError("Unable to fetch the profiles... Error: \(error.localizedDescription)")
         }
     }
-    
+}
+
+// MARK: - CharactersListInteractorInput
+
+extension CharactersListInteractor: CharactersListInteractorInput {
     func viewLoaded(with options: SortAndFilterOptions) {
         fetchData()
         
@@ -61,7 +65,45 @@ class CharactersListInteractor: NSObject, CharactersListInteractorInput {
         task.resume()
     }
     
-    func handleJSON(_ data: Data?, response: URLResponse?, error: Error?) {
+    func applyOptions(_ options: SortAndFilterOptions, searchQuery: String?) {
+        // Sorting
+        fetchedResultsController.fetchRequest.sortDescriptors = [options.sortDescriptor]
+        
+        // Filter by season
+        let filteredSeasonOptionss: [SeasonFilterOption] = options.seasonsOptions.filter({ $0.isSelected })
+        let seasonPredicates: [NSPredicate] = filteredSeasonOptionss.compactMap({ [weak self] seasonOption in
+            guard let strongSelf = self else { return nil }
+            return strongSelf.getSeasonsPredicateFormat(for: seasonOption.number, isSelected: seasonOption.isSelected)
+        })
+    
+        // Filter by status
+        let filteredStatusOptions: [FilterOption] = options.statusOptions.filter({ $0.isSelected })
+        let statusPredicates: [NSPredicate] = filteredStatusOptions.compactMap({ [weak self] statusOption in
+            guard let strongSelf = self else { return nil }
+            return strongSelf.getStatusPredicateFormat(for: statusOption.title, isSelected: statusOption.isSelected)
+        })
+        
+        // Search
+        let searchPredicates: [NSPredicate]
+        if let query = searchQuery, query != "" {
+            searchPredicates = [NSPredicate(format: "name CONTAINS[c] %@ OR nickname CONTAINS[c] %@", query, query)]
+        } else {
+            searchPredicates = []
+        }
+        
+        fetchedResultsController.fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: seasonPredicates + statusPredicates + searchPredicates)
+        fetchData()
+        
+        // Trigger table view update manually since only the sort descriptor was changed, not the content,
+        // and the fetched results controller's delegate functions wont be triggred
+        presenter.didLoadCharacters(fetchedResultsController.fetchedObjects ?? [])
+    }
+}
+
+// MARK: - Utility
+
+extension CharactersListInteractor {
+    private func handleJSON(_ data: Data?, response: URLResponse?, error: Error?) {
         let coreDataManager = CoreDataManager.sharedInstance
         if let data = data,
            let jsonObjects = try? JSONSerialization.jsonObject(with: data,
@@ -73,13 +115,13 @@ class CharactersListInteractor: NSObject, CharactersListInteractorInput {
                    let status = json["status"] as? String,
                    let occupation = json["occupation"] as? [String],
                    let seasonAppearances = json["appearance"] as? [Int] {
-                    addCharacterssToStorage(imageUrl: imageUrl,
-                                            name: name,
-                                            nickname: nickname,
-                                            status: status,
-                                            occupation: occupation,
-                                            seasonAppearances: seasonAppearances,
-                                            coredataManager: coreDataManager)
+                    addCharactersToStorage(imageUrl: imageUrl,
+                                           name: name,
+                                           nickname: nickname,
+                                           status: status,
+                                           occupation: occupation,
+                                           seasonAppearances: seasonAppearances,
+                                           coredataManager: coreDataManager)
                 } else {
                     assert(false, "Failed to parse data.")
                 }
@@ -90,19 +132,18 @@ class CharactersListInteractor: NSObject, CharactersListInteractorInput {
             } else {
                 presenter.didLoadCharacters(fetchedResultsController.fetchedObjects ?? [])
             }
-            
         } else {
             presenter.didFailToUpdateCharacters()
         }
     }
     
-    private func addCharacterssToStorage(imageUrl: String,
-                                         name: String,
-                                         nickname: String,
-                                         status: String,
-                                         occupation: [String],
-                                         seasonAppearances: [Int],
-                                         coredataManager: CoreDataManager) {
+    private func addCharactersToStorage(imageUrl: String,
+                                        name: String,
+                                        nickname: String,
+                                        status: String,
+                                        occupation: [String],
+                                        seasonAppearances: [Int],
+                                        coredataManager: CoreDataManager) {
         var appearances: [Season] = []
         for seasonNumber in seasonAppearances {
             if let season: Season = coreDataManager.find(with: NSPredicate(format: "number == %d", seasonNumber))?.first {
@@ -130,33 +171,6 @@ class CharactersListInteractor: NSObject, CharactersListInteractorInput {
         }
     }
     
-    func applySortAndFilterOptions(_ options: SortAndFilterOptions) {
-        // Sorting
-        fetchedResultsController.fetchRequest.sortDescriptors = [options.sortDescriptor]
-        
-        // Filter by season
-        let filteredSeasonOptionss: [SeasonFilterOption] = options.seasonsOptions.filter({ $0.isSelected })
-        let seasonPredicates: [NSPredicate] = filteredSeasonOptionss.compactMap({ [weak self] seasonOption in
-            guard let strongSelf = self else { return nil }
-            return strongSelf.getSeasonsPredicateFormat(for: seasonOption.number, isSelected: seasonOption.isSelected)
-        })
-    
-        // Filter by status
-        let filteredStatusOptions: [FilterOption] = options.statusOptions.filter({ $0.isSelected })
-        let statusPredicates: [NSPredicate] = filteredStatusOptions.compactMap({ [weak self] statusOption in
-            guard let strongSelf = self else { return nil }
-            return strongSelf.getStatusPredicateFormat(for: statusOption.title, isSelected: statusOption.isSelected)
-        })
-        
-        fetchedResultsController.fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: seasonPredicates + statusPredicates)
-        
-        fetchData()
-        
-        // Trigger table view update manually since only the sort descriptor was changed, not the content,
-        // and the fetched results controller's delegate functions wont be triggred
-        presenter.didLoadCharacters(fetchedResultsController.fetchedObjects ?? [])
-    }
-    
     private func getSeasonsPredicateFormat(for season: Int, isSelected: Bool) -> NSPredicate {
         let selectedFormat = isSelected ? "==" : "!="
         return NSPredicate(format: "ANY seasons.number \(selectedFormat) %d", season)
@@ -166,7 +180,10 @@ class CharactersListInteractor: NSObject, CharactersListInteractorInput {
         let selectedFormat = isSelected ? "==" : "!="
         return NSPredicate(format: "status \(selectedFormat) %@", status)
     }
+
 }
+
+// MARK: - NSFetchedResultsControllerDelegate
 
 extension CharactersListInteractor: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {

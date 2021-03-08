@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AE00500A25F18E74004D3181 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE00500925F18E74004D3181 /* Character.swift */; };
 		AE00502025F1A09C004D3181 /* CharacterPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE00501F25F1A09C004D3181 /* CharacterPreviewViewController.swift */; };
 		AE079F7525F0258000483260 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7425F0258000483260 /* AppDelegate.swift */; };
 		AE079F7725F0258000483260 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079F7625F0258000483260 /* SceneDelegate.swift */; };
@@ -27,10 +26,11 @@
 		AE9319A225F50B2A00521407 /* CheckboxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319A125F50B2A00521407 /* CheckboxCell.swift */; };
 		AE9319A525F50B4D00521407 /* SegmentedControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319A425F50B4D00521407 /* SegmentedControlCell.swift */; };
 		AE9319AC25F50C5A00521407 /* UIViewController+Containment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */; };
+		AE9319B125F53D9700521407 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9319B025F53D9700521407 /* CoreDataManager.swift */; };
+		AE9319B525F53DA500521407 /* BreakingBad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE9319B325F53DA500521407 /* BreakingBad.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AE00500925F18E74004D3181 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		AE00501F25F1A09C004D3181 /* CharacterPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterPreviewViewController.swift; sourceTree = "<group>"; };
 		AE079F7125F0258000483260 /* BreakingBad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BreakingBad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE079F7425F0258000483260 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -52,6 +52,8 @@
 		AE9319A125F50B2A00521407 /* CheckboxCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxCell.swift; sourceTree = "<group>"; };
 		AE9319A425F50B4D00521407 /* SegmentedControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlCell.swift; sourceTree = "<group>"; };
 		AE9319AB25F50C5A00521407 /* UIViewController+Containment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Containment.swift"; sourceTree = "<group>"; };
+		AE9319B025F53D9700521407 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		AE9319B425F53DA500521407 /* BreakingBad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BreakingBad.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +141,8 @@
 		AE079FA425F0495100483260 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				AE00500925F18E74004D3181 /* Character.swift */,
+				AE9319B325F53DA500521407 /* BreakingBad.xcdatamodeld */,
+				AE9319B025F53D9700521407 /* CoreDataManager.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -263,10 +266,11 @@
 				AE93199B25F509A300521407 /* SortAndFilterViewController.swift in Sources */,
 				AE079F9F25F02BEA00483260 /* CharactersListViewController.swift in Sources */,
 				AE079F9C25F02B6D00483260 /* CharactersListPresenter.swift in Sources */,
-				AE00500A25F18E74004D3181 /* Character.swift in Sources */,
+				AE9319B125F53D9700521407 /* CoreDataManager.swift in Sources */,
 				AE9319A225F50B2A00521407 /* CheckboxCell.swift in Sources */,
 				AE93199F25F50B1100521407 /* LabelCell.swift in Sources */,
 				AE9319A525F50B4D00521407 /* SegmentedControlCell.swift in Sources */,
+				AE9319B525F53DA500521407 /* BreakingBad.xcdatamodeld in Sources */,
 				AE079FA225F031BD00483260 /* CharactersListRouter.swift in Sources */,
 				AE079F7525F0258000483260 /* AppDelegate.swift in Sources */,
 				AE9319AC25F50C5A00521407 /* UIViewController+Containment.swift in Sources */,
@@ -475,6 +479,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AE9319B325F53DA500521407 /* BreakingBad.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AE9319B425F53DA500521407 /* BreakingBad.xcdatamodel */,
+			);
+			currentVersion = AE9319B425F53DA500521407 /* BreakingBad.xcdatamodel */;
+			name = BreakingBad.xcdatamodeld;
+			path = "../../../../Desktop/old breaking bad/BreakingBad/DataLayer/BreakingBad.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AE079F6925F0258000483260 /* Project object */;
 }

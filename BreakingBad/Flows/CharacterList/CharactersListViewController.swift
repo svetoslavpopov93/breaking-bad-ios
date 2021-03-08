@@ -35,6 +35,8 @@ class CharactersListViewController: UIViewController {
                              statusOptions: statuses)
     }()
     
+    private var searchQuery: String?
+    
     var interactor: CharactersListInteractorInput
     var router: CharactersListRouterInput
     
@@ -76,6 +78,7 @@ class CharactersListViewController: UIViewController {
         }
     }
     
+    private let searchController = UISearchController()
     private var tableViewLeadingConstraint: NSLayoutConstraint?
     private var sortAndFilterTrailingConstraint: NSLayoutConstraint?
     private var characters: [Character] = []
@@ -107,6 +110,7 @@ extension CharactersListViewController {
     private func configureSubvies() {
         view.backgroundColor = .white
         configureNavigationBar()
+        configureSearchController()
         configureTableView()
         configureSortAndFilterView()
         
@@ -151,6 +155,14 @@ extension CharactersListViewController {
         }), menu: nil)
     }
     
+    private func configureSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search character"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
     private func configureTableView() {
         view.addSubview(tableView)
         tableView.delegate = self
@@ -171,8 +183,9 @@ extension CharactersListViewController {
         let sortAndFilterViewController = SortAndFilterViewController(seasons: seasons,
                                                                       statuses: statuses,
                                                                       sortAndFilterOptions: sortAndFilterOptions,
-                                                                      resultsHandler: { [weak interactor] options in
-            interactor?.applySortAndFilterOptions(options)
+                                                                      resultsHandler: { [weak self] options in
+                                                                        guard let strongSelf = self else { return }
+                                                                        strongSelf.interactor.applyOptions(options, searchQuery: strongSelf.searchQuery)
         })
         add(sortAndFilterViewController, to: sortAndFilterContainer)
     }
@@ -246,5 +259,14 @@ extension CharactersListViewController: UITableViewDelegate, UITableViewDataSour
         cell.configure(with: character.imageUrl, name: character.name)
         cell.selectionStyle = .none
         return cell
+    }
+}
+
+// MARK: - UISearchResultsUpdating
+
+extension CharactersListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        searchQuery = searchController.searchBar.text
+        interactor.applyOptions(sortAndFilterOptions, searchQuery: searchQuery)
     }
 }
