@@ -7,4 +7,5 @@ target 'BreakingBad' do
 
   # Pods for BreakingBad
 pod 'SDWebImage', '~> 5.0'
+pod 'RHBCoreData'
 end

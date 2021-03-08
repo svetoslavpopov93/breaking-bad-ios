@@ -78,8 +78,9 @@ class CharactersListCell: UITableViewCell {
         }
         
         thumbnailImage.contentMode = .scaleAspectFill
+        thumbnailImage.tintColor = ColorPalette.activeColor
         thumbnailImage.sd_setImage(with: URL(string: imageUrl ?? ""),
-                                   placeholderImage: UIImage(systemName: "person.fill"),
+                                   placeholderImage: UIImage(systemName: "person.fill")?.withRenderingMode(.alwaysTemplate),
                                    options: .continueInBackground,
                                    context: [:])
         mainStackView.layer.cornerRadius = 20

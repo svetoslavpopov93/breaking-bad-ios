@@ -12,7 +12,7 @@ class CharactersListConfigurator {
     static func configure(navigationController: UINavigationController) -> UIViewController {
         let router = CharactersListRouter(navigationController: navigationController)
         let presenter = CharactersListPresenter()
-        let interactor = CharactersListInteractor(presenter: presenter)
+        let interactor = CharactersListInteractor(presenter: presenter, webHandler: WebHandler())
         let viewController = CharactersListViewController(interactor: interactor, router: router)
         presenter.view = viewController
         return viewController

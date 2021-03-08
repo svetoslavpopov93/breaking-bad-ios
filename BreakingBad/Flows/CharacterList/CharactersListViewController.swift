@@ -24,7 +24,6 @@ class CharactersListViewController: UIViewController {
     private var statuses: [StatusFilterOption] = [
         StatusFilterOption(title: "Alive", isSelected: false),
         StatusFilterOption(title: "Presumed dead", isSelected: false),
-        StatusFilterOption(title: "Dead", isSelected: false),
         StatusFilterOption(title: "Deceased", isSelected: false)
     ]
     
@@ -128,6 +127,8 @@ class CharactersListViewController: UIViewController {
 extension CharactersListViewController {
     private func configureSubvies() {
         view.backgroundColor = ColorPalette.backgroundColor
+        activityIndicator.color = ColorPalette.activeColor
+        
         configureNavigationBar()
         configureSearchController()
         configureTableView()

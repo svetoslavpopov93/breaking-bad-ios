@@ -19,15 +19,19 @@ protocol CharactersListInteractorOutput: class {
 
 enum BreakingBadError: Error {
     case downloadFailure
+    case invalidResponse
 }
 
 class CharactersListInteractor: NSObject {
     let presenter: CharactersListInteractorOutput
     let coreDataManager = CoreDataManager.sharedInstance
+    let webHandler: WebHandlerProtocol
     let fetchedResultsController: NSFetchedResultsController<Character>
     
-    init(presenter: CharactersListInteractorOutput) {
+    init(presenter: CharactersListInteractorOutput,
+         webHandler: WebHandlerProtocol) {
         self.presenter = presenter
+        self.webHandler = webHandler
         let request = NSFetchRequest<Character>(entityName: "Character")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
@@ -52,17 +56,14 @@ class CharactersListInteractor: NSObject {
 extension CharactersListInteractor: CharactersListInteractorInput {
     func viewLoaded(with options: SortAndFilterOptions) {
         fetchData()
-        
-        guard let url = URL(string: "https://breakingbadapi.com/api/characters") else {
-            return
-        }
-    
-        let request = URLRequest(url: url)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { [weak self] data, response, error in
-            self?.handleJSON(data, response: response, error: error)
-        }
-        task.resume()
+        webHandler.fetchCharacters(completionHandler: { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.handleJSON(data)
+            case .failure:
+                self?.presenter.didFailToUpdateCharacters()
+            }
+        })
     }
     
     func applyOptions(_ options: SortAndFilterOptions, searchQuery: String?) {
@@ -103,28 +104,10 @@ extension CharactersListInteractor: CharactersListInteractorInput {
 // MARK: - Utility
 
 extension CharactersListInteractor {
-    private func handleJSON(_ data: Data?, response: URLResponse?, error: Error?) {
-        let coreDataManager = CoreDataManager.sharedInstance
-        if let data = data,
-           let jsonObjects = try? JSONSerialization.jsonObject(with: data,
-                                                               options: JSONSerialization.ReadingOptions.allowFragments) as? [[AnyHashable: Any]] {
+    private func handleJSON(_ data: Data) {
+        if let jsonObjects = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as? [[AnyHashable: Any]] {
             for json in jsonObjects {
-                if let imageUrl = json["img"] as? String,
-                   let name = json["name"] as? String,
-                   let nickname = json["nickname"] as? String,
-                   let status = json["status"] as? String,
-                   let occupation = json["occupation"] as? [String],
-                   let seasonAppearances = json["appearance"] as? [Int] {
-                    addCharactersToStorage(imageUrl: imageUrl,
-                                           name: name,
-                                           nickname: nickname,
-                                           status: status,
-                                           occupation: occupation,
-                                           seasonAppearances: seasonAppearances,
-                                           coredataManager: coreDataManager)
-                } else {
-                    assert(false, "Failed to parse data.")
-                }
+                addCharactersToStorage(json: json)
             }
             
             if coreDataManager.context.hasChanges {
@@ -136,38 +119,40 @@ extension CharactersListInteractor {
             presenter.didFailToUpdateCharacters()
         }
     }
-    
-    private func addCharactersToStorage(imageUrl: String,
-                                        name: String,
-                                        nickname: String,
-                                        status: String,
-                                        occupation: [String],
-                                        seasonAppearances: [Int],
-                                        coredataManager: CoreDataManager) {
-        var appearances: [Season] = []
-        for seasonNumber in seasonAppearances {
-            if let season: Season = coreDataManager.find(with: NSPredicate(format: "number == %d", seasonNumber))?.first {
-                appearances.append(season)
-            } else {
-                let setupBlock: ((Season) -> Void) = { season in
-                    season.number = Int32(seasonNumber)
-                    season.title = "Season \(seasonNumber)"
+
+    private func addCharactersToStorage(json: [AnyHashable: Any]) {
+        if let imageUrl = json["img"] as? String,
+           let name = json["name"] as? String,
+           let nickname = json["nickname"] as? String,
+           let status = json["status"] as? String,
+           let occupation = json["occupation"] as? [String],
+           let seasonAppearances = json["appearance"] as? [Int] {
+            
+            var appearances: [Season] = []
+            for seasonNumber in seasonAppearances {
+                if let season: Season = coreDataManager.find(with: NSPredicate(format: "number == %d", seasonNumber))?.first {
+                    appearances.append(season)
+                } else {
+                    let setupBlock: ((Season) -> Void) = { season in
+                        season.number = Int32(seasonNumber)
+                        season.title = "Season \(seasonNumber)"
+                    }
+                    appearances.append(coreDataManager.insert(setupBlock: setupBlock))
                 }
-                appearances.append(coreDataManager.insert(setupBlock: setupBlock))
             }
-        }
-        
-        if !coreDataManager.checkIfExists(of: Character.self, predicate: NSPredicate(format: "name == %@", name)) {
-            let setupBlock: ((Character) -> Void) = { character in
-                character.imageUrl = imageUrl
-                character.name = name
-                character.nickname = nickname
-                character.status = status
-                character.occupation = occupation
-                let appearancesSet = NSSet(array: appearances)
-                character.addToSeasons(appearancesSet)
+            
+            if !coreDataManager.checkIfExists(of: Character.self, predicate: NSPredicate(format: "name == %@", name)) {
+                let setupBlock: ((Character) -> Void) = { character in
+                    character.imageUrl = imageUrl
+                    character.name = name
+                    character.nickname = nickname
+                    character.status = status
+                    character.occupation = occupation
+                    let appearancesSet = NSSet(array: appearances)
+                    character.addToSeasons(appearancesSet)
+                }
+                coreDataManager.insert(setupBlock: setupBlock)
             }
-            coreDataManager.insert(setupBlock: setupBlock)
         }
     }
     
@@ -180,7 +165,6 @@ extension CharactersListInteractor {
         let selectedFormat = isSelected ? "==" : "!="
         return NSPredicate(format: "status \(selectedFormat) %@", status)
     }
-
 }
 
 // MARK: - NSFetchedResultsControllerDelegate

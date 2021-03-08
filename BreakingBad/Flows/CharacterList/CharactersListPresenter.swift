@@ -15,6 +15,6 @@ class CharactersListPresenter: CharactersListInteractorOutput {
     }
     
     func didFailToUpdateCharacters() {
-        
+        view?.showUpdateFailure()
     }
 }

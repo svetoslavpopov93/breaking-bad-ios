@@ -19,6 +19,7 @@
 		AE079FA225F031BD00483260 /* CharactersListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA125F031BD00483260 /* CharactersListRouter.swift */; };
 		AE079FA625F0499400483260 /* CharactersListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FA525F0499400483260 /* CharactersListConfigurator.swift */; };
 		AE079FB125F16B6000483260 /* CharactersListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE079FB025F16B6000483260 /* CharactersListCell.swift */; };
+		AE25C9CF25F6E62300ADB4C4 /* WebHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE25C9CE25F6E62300ADB4C4 /* WebHandler.swift */; };
 		AE79A32A25F65AF600A740C1 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE79A32925F65AF600A740C1 /* ColorPalette.swift */; };
 		AE93199B25F509A300521407 /* SortAndFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199A25F509A300521407 /* SortAndFilterViewController.swift */; };
 		AE93199F25F50B1100521407 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93199E25F50B1100521407 /* LabelCell.swift */; };
@@ -46,6 +47,7 @@
 		AE079FA125F031BD00483260 /* CharactersListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListRouter.swift; sourceTree = "<group>"; };
 		AE079FA525F0499400483260 /* CharactersListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListConfigurator.swift; sourceTree = "<group>"; };
 		AE079FB025F16B6000483260 /* CharactersListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListCell.swift; sourceTree = "<group>"; };
+		AE25C9CE25F6E62300ADB4C4 /* WebHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebHandler.swift; sourceTree = "<group>"; };
 		AE79A32925F65AF600A740C1 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		AE93199A25F509A300521407 /* SortAndFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortAndFilterViewController.swift; sourceTree = "<group>"; };
 		AE93199E25F50B1100521407 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				AE9319B325F53DA500521407 /* BreakingBad.xcdatamodeld */,
 				AE9319B025F53D9700521407 /* CoreDataManager.swift */,
+				AE25C9CE25F6E62300ADB4C4 /* WebHandler.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				AE9319A225F50B2A00521407 /* CheckboxCell.swift in Sources */,
 				AE93199F25F50B1100521407 /* LabelCell.swift in Sources */,
 				AE9319A525F50B4D00521407 /* SegmentedControlCell.swift in Sources */,
+				AE25C9CF25F6E62300ADB4C4 /* WebHandler.swift in Sources */,
 				AE9319B525F53DA500521407 /* BreakingBad.xcdatamodeld in Sources */,
 				AE079FA225F031BD00483260 /* CharactersListRouter.swift in Sources */,
 				AE079F7525F0258000483260 /* AppDelegate.swift in Sources */,
