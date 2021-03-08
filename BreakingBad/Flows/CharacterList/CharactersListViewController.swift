@@ -13,22 +13,27 @@ protocol CharactersListViewInput: class {
 }
 
 class CharactersListViewController: UIViewController {
-    private var seasons: [FilterOption] = [
-        FilterOption(title: "1", isSelected: false),
-        FilterOption(title: "2", isSelected: false),
-        FilterOption(title: "3", isSelected: false),
-        FilterOption(title: "4", isSelected: false),
-        FilterOption(title: "5", isSelected: false)
-    ]
-    private var statuses: [FilterOption] = [
-        FilterOption(title: "Alive", isSelected: false),
-        FilterOption(title: "Presumed dead", isSelected: false),
-        FilterOption(title: "Dead", isSelected: false),
-        FilterOption(title: "Deceased", isSelected: false)
+    private var seasons: [SeasonFilterOption] = [
+        SeasonFilterOption(number: 1, title: "Season 1", isSelected: false),
+        SeasonFilterOption(number: 2, title: "Season 2", isSelected: false),
+        SeasonFilterOption(number: 3, title: "Season 3", isSelected: false),
+        SeasonFilterOption(number: 4, title: "Season 4", isSelected: false),
+        SeasonFilterOption(number: 5, title: "Season 5", isSelected: false)
     ]
     
+    private var statuses: [StatusFilterOption] = [
+        StatusFilterOption(title: "Alive", isSelected: false),
+        StatusFilterOption(title: "Presumed dead", isSelected: false),
+        StatusFilterOption(title: "Dead", isSelected: false),
+        StatusFilterOption(title: "Deceased", isSelected: false)
+    ]
     
-    
+    private lazy var sortAndFilterOptions: SortAndFilterOptions = {
+        SortAndFilterOptions(sortCriteria: "name",
+                             isAscending: true,
+                             seasonsOptions: seasons,
+                             statusOptions: statuses)
+    }()
     
     var interactor: CharactersListInteractorInput
     var router: CharactersListRouterInput
@@ -92,7 +97,7 @@ class CharactersListViewController: UIViewController {
         configureSubvies()
         
         activityIndicator.startAnimating()
-        interactor.viewLoaded()
+        interactor.viewLoaded(with: sortAndFilterOptions)
     }
 }
 
@@ -163,7 +168,12 @@ extension CharactersListViewController {
         
         view.addSubview(blurView)
         view.addSubview(sortAndFilterContainer)
-        let sortAndFilterViewController = SortAndFilterViewController(seasons: seasons, statuses: statuses)
+        let sortAndFilterViewController = SortAndFilterViewController(seasons: seasons,
+                                                                      statuses: statuses,
+                                                                      sortAndFilterOptions: sortAndFilterOptions,
+                                                                      resultsHandler: { [weak interactor] options in
+            interactor?.applySortAndFilterOptions(options)
+        })
         add(sortAndFilterViewController, to: sortAndFilterContainer)
     }
 }
@@ -182,7 +192,7 @@ extension CharactersListViewController {
         
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             self?.blurView.isHidden = false
-            self?.blurView.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
+            self?.blurView.backgroundColor = UIColor.gray.withAlphaComponent(0.3)
             self?.view.layoutIfNeeded()
         })
     }

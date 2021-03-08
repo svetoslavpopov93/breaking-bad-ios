@@ -10,7 +10,7 @@ import CoreData
 class CharactersListPresenter: CharactersListInteractorOutput {
     weak var view: CharactersListViewInput?
     
-    func didUpdateCharacters(_ characters: [Character]) {
+    func didLoadCharacters(_ characters: [Character]) {
         view?.update(with: characters)
     }
     

@@ -7,20 +7,48 @@
 
 import UIKit
 
-struct FilterOption {
+protocol FilterOption {
+    var title: String { get }
+    var isSelected: Bool { get set }
+}
+
+struct StatusFilterOption: FilterOption {
     let title: String
     var isSelected: Bool
 }
 
+struct SeasonFilterOption: FilterOption {
+    let number: Int
+    let title: String
+    var isSelected: Bool
+}
+
+struct SortAndFilterOptions {
+    var sortCriteria: String
+    var isAscending: Bool
+    var seasonsOptions: [SeasonFilterOption]
+    var statusOptions: [FilterOption]
+    
+    var sortDescriptor: NSSortDescriptor {
+        NSSortDescriptor(key: sortCriteria, ascending: isAscending)
+    }
+}
+
 class SortAndFilterViewController: UIViewController {
+    private enum Constants {
+        static let criteria = ["name", "nickname"]
+        static let ascending = ["ascending", "decsending"]
+    }
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
-    private var seasons: [FilterOption]
+    private var seasons: [SeasonFilterOption]
     private var statuses: [FilterOption]
+    private let resultsHandler: ((SortAndFilterOptions) -> Void)
+    private var sortAndFilterOptions: SortAndFilterOptions
     
     private enum Section: Int, CaseIterable {
         case sort
@@ -38,9 +66,14 @@ class SortAndFilterViewController: UIViewController {
         case status
     }
     
-    init(seasons: [FilterOption], statuses: [FilterOption]) {
+    init(seasons: [SeasonFilterOption],
+         statuses: [FilterOption],
+         sortAndFilterOptions: SortAndFilterOptions,
+         resultsHandler: @escaping ((SortAndFilterOptions) -> Void)) {
         self.seasons = seasons
         self.statuses = statuses
+        self.sortAndFilterOptions = sortAndFilterOptions
+        self.resultsHandler = resultsHandler
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -129,9 +162,9 @@ extension SortAndFilterViewController: UITableViewDelegate, UITableViewDataSourc
         
         switch sectionType {
         case .sort:
-            return "Sort by"
+            return "sort by"
         case .filterBySeason:
-            return "Filter by"
+            return "filter by"
         case .filterByStatus:
             return nil
         }
@@ -149,12 +182,18 @@ extension SortAndFilterViewController {
         }
         switch sortCellType {
         case .criteria:
-            cell.configure(with: ["Name", "Nickname", "Season"], selectedSegment: UISegmentedControl.noSegment, resultsHandler: { index in
-                print("Selected criteria at index: \(index)")
+            let index = Constants.criteria.firstIndex(of: sortAndFilterOptions.sortCriteria)
+            let distance = Constants.criteria.distance(from: 0, to: index ?? .zero)
+            cell.configure(with: Constants.criteria, selectedSegment: distance, resultsHandler: { [weak self] index in
+                guard let strongSelf = self else { return }
+                strongSelf.sortAndFilterOptions.sortCriteria = Constants.criteria[index]
+                strongSelf.resultsHandler(strongSelf.sortAndFilterOptions)
             })
         case .ascending:
-            cell.configure(with: ["Ascending", "Decsending"], selectedSegment: UISegmentedControl.noSegment, resultsHandler: { index in
-                print("Selected ascending at index: \(index)")
+            cell.configure(with: Constants.ascending, selectedSegment: sortAndFilterOptions.isAscending ? 0 : 1, resultsHandler: { [weak self] index in
+                guard let strongSelf = self else { return }
+                strongSelf.sortAndFilterOptions.isAscending = index == 0
+                strongSelf.resultsHandler(strongSelf.sortAndFilterOptions)
             })
         }
         return cell
@@ -169,12 +208,18 @@ extension SortAndFilterViewController {
         case .season:
             let season = seasons[indexPath.row - 1]
             return configuredCheckboxCellAt(indexPath: indexPath, text: season.title, isSelected: season.isSelected, resultHandler: { [weak self] isSelected in
-                self?.seasons[indexPath.row - 1].isSelected = isSelected
+                guard let strongSelf = self else { return }
+                strongSelf.seasons[indexPath.row - 1].isSelected = isSelected
+                strongSelf.sortAndFilterOptions.seasonsOptions = strongSelf.seasons.filter({ $0.isSelected })
+                strongSelf.resultsHandler(strongSelf.sortAndFilterOptions)
             })
         case .status:
             let status = statuses[indexPath.row - 1]
             return configuredCheckboxCellAt(indexPath: indexPath, text: status.title, isSelected: status.isSelected, resultHandler: { [weak self] isSelected in
-                self?.statuses[indexPath.row - 1].isSelected = isSelected
+                guard let strongSelf = self else { return }
+                strongSelf.statuses[indexPath.row - 1].isSelected = isSelected
+                strongSelf.sortAndFilterOptions.statusOptions = strongSelf.statuses.filter({ $0.isSelected })
+                strongSelf.resultsHandler(strongSelf.sortAndFilterOptions)
             })
         }
     }
@@ -195,9 +240,9 @@ extension SortAndFilterViewController {
         }
         switch type {
         case .season:
-            cell.configure(with: "Season")
+            cell.configure(with: "season")
         case .status:
-            cell.configure(with: "Status")
+            cell.configure(with: "status")
         }
         return cell
     }

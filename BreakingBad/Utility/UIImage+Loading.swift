@@ -15,13 +15,12 @@ extension UIImageView {
         }
         
         URLSession.shared.dataTask(with: url, completionHandler: { [weak self] data, response, error in
+            guard let imageData = data, let image = UIImage(data: imageData) else {
+                failureBlock()
+                return
+            }
             DispatchQueue.main.async {
-                guard let imageData = data, let image = UIImage(data: imageData) else {
-                    failureBlock()
-                    return
-                }
                 self?.image = image
-                self?.contentMode = .scaleAspectFill
             }
         }).resume()
     }

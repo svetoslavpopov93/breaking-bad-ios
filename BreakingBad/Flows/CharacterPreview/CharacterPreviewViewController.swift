@@ -140,14 +140,14 @@ class CharacterPreviewViewController: UIViewController {
         namesStackView.addArrangedSubview(nicknameLabel)
         
         let nameLabel = UILabel()
-        nameLabel.text = "Actor: \(character.name)"
+        nameLabel.text = "Actor: \(character.name ?? "")"
         namesStackView.addArrangedSubview(nameLabel)
         imageContainerView.addSubview(namesStackView)
         
         imageView.clipsToBounds = true
-        imageView.downloadFromURL(character.imageUrl, failureBlock: { [weak self] in
-            self?.imageView.image = UIImage(systemName: "person.fill.xmark")?.withRenderingMode(.alwaysTemplate)
-            self?.imageView.tintColor = .red
+        imageView.downloadFromURL(character.imageUrl ?? "", failureBlock: { [weak imageView] in
+            imageView?.image = UIImage(systemName: "person.fill.xmark")?.withRenderingMode(.alwaysTemplate)
+            imageView?.tintColor = .red
         })
         
         stackView.addArrangedSubview(imageContainerView)
@@ -157,12 +157,16 @@ class CharacterPreviewViewController: UIViewController {
         let appearancesLabel = UILabel()
         appearancesLabel.translatesAutoresizingMaskIntoConstraints = false
         appearancesLabel.setContentHuggingPriority(.required, for: .horizontal)
-        let appearances: [String] = character.seasonAppearances.map({ "\($0)"})
-        appearancesLabel.text = "Seasons: \(appearances.joined(separator: ", "))"
+        let seasons: [Season]? = character.seasons?.allObjects as? [Season]
+        let joinedSeasons = (seasons ?? [])
+            .sorted(by: { $0.number < $1.number })
+            .map({ "\($0.number)" })
+            .joined(separator: ", ")
+        appearancesLabel.text = "Seasons: \(joinedSeasons)"
         
         let statusLabel = UILabel()
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        statusLabel.text = "Status: \(character.status)"
+        statusLabel.text = "Status: \(character.status ?? "")"
         statusLabel.textAlignment = .right
         
         let statusAndAppearancesStackView = UIStackView()
@@ -174,7 +178,8 @@ class CharacterPreviewViewController: UIViewController {
         let occupationLabel = UILabel()
         occupationLabel.translatesAutoresizingMaskIntoConstraints = false
         occupationLabel.numberOfLines = 0
-        occupationLabel.text = "Occupation: \(character.occupation.joined(separator: ", "))"
+        let occupation = character.occupation ?? []
+        occupationLabel.text = "Occupation: \(occupation.joined(separator: ", "))"
         
         let container = UIStackView(arrangedSubviews: [statusAndAppearancesStackView, occupationLabel])
         container.axis = .vertical
